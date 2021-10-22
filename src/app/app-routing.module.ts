@@ -5,6 +5,7 @@ import { NotFoundComponent } from './modules/shared/pages/not-found/not-found.co
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
+  { path: '', pathMatch: 'full', redirectTo: 'login' },
   { path: '**', component: NotFoundComponent },
 ];
 

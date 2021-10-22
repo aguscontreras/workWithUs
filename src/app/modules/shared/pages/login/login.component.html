@@ -1,1 +1,15 @@
-<p>Login component</p>
+<div class="card">
+  <h5>Ingresar</h5>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div class="p-fluid">
+      <div class="p-field">
+        <label for="username">Username</label>
+        <input type="text" pInputText formControlName="username" />
+      </div>
+      <div class="p-field">
+        <label for="password">Password</label>
+        <input type="password" pInputText formControlName="password" />
+      </div>
+    </div>
+  </form>
+</div>

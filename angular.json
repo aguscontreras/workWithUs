@@ -25,9 +25,11 @@
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
               "src/styles.scss",
-              "node_modules/primeicons/primeicons.css",
-              "node_modules/primeflex/primeflex.css",
+              "src/assets/css/normalize.css",
+              "src/assets/css/bootstrap-grid.min.css",
+              "src/assets/css/bootstrap-utilities.min.css",
               "node_modules/primeng/resources/themes/tailwind-light/theme.css",
+              "node_modules/primeicons/primeicons.css",
               "node_modules/primeng/resources/primeng.min.css"
             ],
             "scripts": [],

@@ -2,12 +2,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PrimengModule } from './modules/primeng/primeng.module';
 import { SharedModule } from './modules/shared/shared.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { fakeBackendProvider } from './_helpers';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,7 +21,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     PrimengModule,
     SharedModule,
   ],
-  providers: [],
+  providers: [fakeBackendProvider],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

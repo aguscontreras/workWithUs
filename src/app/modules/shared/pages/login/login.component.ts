@@ -63,13 +63,15 @@ export class LoginComponent implements OnInit {
       .subscribe({
         next: () => {
           const returnUrl =
-            this.route.snapshot.queryParams.get('returnUr') || '';
+            //  this.route.snapshot.queryParams.get('returnUr') || '';
+            this.route.snapshot.queryParamMap.get('returnUrl' || '');
           this.router.navigateByUrl(returnUrl);
         },
 
         error: (err) => {
           this.error = err;
           this.loading = false;
+          console.error(err);
         },
       });
   }

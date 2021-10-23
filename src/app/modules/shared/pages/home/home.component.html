@@ -1,0 +1,50 @@
+<div class="img-wrapper"></div>
+<main class="main-wrapper">
+  <div class="container">
+    <h1 class="heading">Te estamos buscando</h1>
+    <div class="row">
+      <div class="col-md-8">
+        <p class="text">
+          Animate a formar parte de nuestra empresa a través de nuestro portal
+          de empleos. Crecé con nosotros en un excelente ambiente laboral, y
+          disfrutá los beneficios que tenemos para ofrecerte.
+        </p>
+      </div>
+    </div>
+
+    <div class="form-wrapper mt-4">
+      <div class="row">
+        <div class="col-md-8 col-lg-6">
+          <div class="row">
+            <div class="col">
+              <div class="form-group"></div>
+              <input
+                type="email"
+                pInputText
+                id="txtEmail"
+                placeholder="Correo electrónico"
+                class="form-group__form-control--fluid"
+                [(ngModel)]="email"
+              />
+            </div>
+
+            <div class="col-auto">
+              <button
+                pButton
+                type="button"
+                label="Registrarme"
+                class="p-button-primary btn-block"
+                id="btnRegistrar"
+                (click)="onClickBtnRegistrar()"
+              ></button>
+            </div>
+          </div>
+
+          <p class="text--light">
+            ¿Ya estás registrado/a? Ingresá desde <a href="#">acá</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

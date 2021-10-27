@@ -12,7 +12,7 @@
       </div>
     </div>
 
-    <div class="col-auto" *ngIf="!isUserLoggedIn">
+    <div class="col-auto" *ngIf="!isUserLoggedIn; else logoutButton">
       <button
         pButton
         label="Registrarme"
@@ -26,5 +26,17 @@
         (click)="onClickBtnIngresar()"
       ></button>
     </div>
+
+    <ng-template #logoutButton>
+      <div class="col-auto">
+        <button
+          pButton
+          label="Cerrar sesión"
+          icon="pi pi-sign-out"
+          class="p-button-secondary"
+          (click)="onClickBtnCerrarSesion()"
+        ></button>
+      </div>
+    </ng-template>
   </div>
 </nav>

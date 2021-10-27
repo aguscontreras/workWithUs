@@ -4,8 +4,9 @@
       <div class="col-md-5 col-lg-4">
         <div class="img-wrapper">
           <img
-            src="/assets/svg/undraw_Work_together_re_5yhn.svg"
+            src="/assets/svg/register.svg"
             class="img-wrapper__img"
+            alt="Registrarme"
           />
         </div>
       </div>
@@ -31,8 +32,9 @@
               />
               <small
                 *ngIf="
-                  formRegister.controls['username'].dirty &&
-                  formRegister.controls['username'].invalid
+                  (formRegister.controls['username'].dirty &&
+                    formRegister.controls['username'].invalid) ||
+                  (submitted && formRegister.controls['username'].invalid)
                 "
                 class="mt-2"
                 >Ingresa un email válido.</small
@@ -49,13 +51,18 @@
               />
               <small
                 *ngIf="
-                  formRegister.controls['password'].dirty &&
-                  formRegister.controls['password'].invalid
+                  (formRegister.controls['password'].dirty &&
+                    formRegister.controls['password'].invalid) ||
+                  (submitted && formRegister.controls['password'].invalid)
                 "
                 class="mt-2"
                 >Este campo es requerido.</small
               >
             </div>
+
+            <p *ngIf="error">
+              <i class="pi pi-exclamation-circle"></i> {{ error }}
+            </p>
 
             <div class="row justify-content-end mt-4">
               <div class="col-auto">
@@ -64,6 +71,7 @@
                   icon="pi pi-arrow-right"
                   label="Continuar"
                   type="submit"
+                  [loading]="loading"
                 ></button>
               </div>
             </div>
@@ -71,7 +79,8 @@
         </div>
 
         <p class="text-center mt-4">
-          ¿Ya estás registrado/a? Ingresá desde <a [routerLink]="'/login'">acá</a>
+          ¿Ya estás registrado/a? Ingresá desde
+          <a [routerLink]="'/login'">acá</a>
         </p>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -9,16 +9,20 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '../../../../_services/authentication.service';
 import { first } from 'rxjs/operators';
 import { Role } from '../../../../_models/role';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, OnDestroy {
   formRegister: FormGroup;
   loading: boolean;
-  error: any;
+  error: string;
+  routeSubscription: Subscription;
+  submitted = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -34,11 +38,15 @@ export class RegisterComponent implements OnInit {
       role: [Role.User],
     });
 
-    this.route.queryParamMap.subscribe({
+    this.routeSubscription = this.route.queryParamMap.subscribe({
       next: (params) => {
         this.f.username.setValue(params.get('email'));
       },
     });
+  }
+
+  ngOnDestroy(): void {
+    this.routeSubscription.unsubscribe();
   }
 
   get f(): {
@@ -48,7 +56,7 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log(this.formRegister.value);
+    this.submitted = true;
 
     if (!this.formRegister.valid) {
       return;
@@ -67,8 +75,8 @@ export class RegisterComponent implements OnInit {
           this.loginUser(username, password);
         },
 
-        error: (err) => {
-          this.error = err;
+        error: (err: HttpErrorResponse) => {
+          this.error = err.error;
           this.loading = false;
           console.error(err);
         },

@@ -38,6 +38,7 @@ export class ForgotComponent implements OnInit {
     console.log(this.username.value);
 
     this.submitted = true;
+    this.messageService.clear();
 
     if (this.username.invalid) {
       return;
@@ -53,7 +54,7 @@ export class ForgotComponent implements OnInit {
               severity: 'success',
               summary: 'Correo enviado',
               detail: 'Revisa tu casilla de correo electrónico',
-              life: 7000
+              life: 7000,
             });
           }
         },

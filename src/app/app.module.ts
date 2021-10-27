@@ -10,15 +10,16 @@ import { AppComponent } from './app.component';
 import { PrimengModule } from './modules/primeng/primeng.module';
 import { SharedModule } from './modules/shared/shared.module';
 import { fakeBackendProvider } from './_helpers';
-import { RegisterComponent } from './modules/common/pages/register/register.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
-  declarations: [AppComponent, RegisterComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
+    RouterModule,
     FormsModule,
     ReactiveFormsModule,
     PrimengModule,

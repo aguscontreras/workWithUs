@@ -1,0 +1,1 @@
+export { PostulantModule } from './postulant.module';

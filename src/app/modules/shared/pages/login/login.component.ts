@@ -9,6 +9,7 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { AuthenticationService } from '../../../../_services';
+import { Role } from '../../../../_models/role';
 
 @Component({
   selector: 'app-login',
@@ -63,10 +64,13 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe({
         next: () => {
-          const returnUrl =
-            //  this.route.snapshot.queryParams.get('returnUr') || '';
-            this.route.snapshot.queryParamMap.get('returnUrl' || '');
-          this.router.navigateByUrl(returnUrl);
+          let returnUrl: string;
+
+          if (this.route.snapshot.queryParamMap.get('returnUrl')) {
+            returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
+          } else {
+            this.authenticationService.navigateAfterLogin(returnUrl);
+          }
         },
 
         error: (err: HttpErrorResponse) => {

@@ -36,6 +36,8 @@ export class BackendInterceptor implements HttpInterceptor {
           return authenticate();
         case url.endsWith('users/register') && method === 'POST':
           return register();
+        case url.endsWith('users/restorePassword') && method === 'POST':
+          return restorePassword();
         case url.endsWith('/users') && method === 'GET':
           return getUsers();
         case url.match(/\/users\/\d+$/) && method === 'GET':
@@ -53,6 +55,7 @@ export class BackendInterceptor implements HttpInterceptor {
       );
 
       if (!user) {
+        console.error('Usuario o contraseña incorrectos');
         return error('Usuario o contraseña incorrectos');
       }
 
@@ -84,6 +87,15 @@ export class BackendInterceptor implements HttpInterceptor {
       });
     }
 
+    function restorePassword(): Observable<HttpResponse<unknown>> {
+      const { username } = body;
+      if (!isRegistered(username)) {
+        return error('La cuenta de correo electrónico no está registrada.');
+      }
+
+      return ok(1);
+    }
+
     function getUsers(): Observable<HttpResponse<unknown>> {
       if (!isAdmin()) {
         return unauthorized();
@@ -108,11 +120,15 @@ export class BackendInterceptor implements HttpInterceptor {
     }
 
     function ok(resp: unknown): Observable<HttpResponse<unknown>> {
-      return of(new HttpResponse({ status: 200, body: resp }));
+      return of(new HttpResponse({ status: 200, body: resp })).pipe(
+        materialize(),
+        delay(500),
+        dematerialize()
+      );
     }
 
     function error(err: string): Observable<HttpResponse<unknown>> {
-      return throwError({ status: 400, error: { err } }).pipe(
+      return throwError({ status: 400, error: err }).pipe(
         materialize(),
         delay(500),
         dematerialize()

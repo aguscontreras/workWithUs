@@ -50,7 +50,7 @@ export class AuthenticationService {
         password,
       })
       .pipe(
-        tap((user) => {
+        map((user) => {
           localStorage.setItem('user', JSON.stringify(user));
           this.userSubject.next(user);
           return user;
@@ -65,7 +65,7 @@ export class AuthenticationService {
         password,
       })
       .pipe(
-        tap((user) => {
+        map((user) => {
           console.log({ ...user });
           localStorage.setItem('user', JSON.stringify(user));
           this.userSubject.next(user);
@@ -77,6 +77,12 @@ export class AuthenticationService {
   logout(): void {
     localStorage.removeItem('user');
     this.userSubject.next(null);
-    this.router.navigate(['/login']);
+    this.router.navigate(['/home']);
+  }
+
+  restorePassword(username: string): Observable<number> {
+    return this.http.post<any>(`${environment.apiUrl}/users/restorePassword`, {
+      username,
+    });
   }
 }

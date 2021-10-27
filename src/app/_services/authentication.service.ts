@@ -4,7 +4,8 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../_models';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
+import { Role } from '../_models/role';
 
 @Injectable({
   providedIn: 'root',
@@ -14,11 +15,28 @@ export class AuthenticationService {
   public user$: Observable<User>;
 
   constructor(private router: Router, private http: HttpClient) {
+    this.setDefaultUsers();
+
     this.userSubject = new BehaviorSubject<User>(
       JSON.parse(localStorage.getItem('user'))
     );
 
     this.user$ = this.userSubject.asObservable();
+  }
+
+  private setDefaultUsers(): void {
+    if (!localStorage.getItem('users')) {
+      const defaultUsers: User[] = [];
+      const admin = new User('admin', 'admin', Role.Admin);
+      const recruiter = new User('recruiter', 'recruiter', Role.Recruiter);
+      const postulante = new User('postulante', 'postulante', Role.User);
+      admin.id = 1;
+      recruiter.id = 2;
+      postulante.id = 3;
+
+      defaultUsers.push(admin, recruiter, postulante);
+      localStorage.setItem('users', JSON.stringify(defaultUsers));
+    }
   }
 
   public get userValue(): User {
@@ -32,7 +50,23 @@ export class AuthenticationService {
         password,
       })
       .pipe(
-        map((user) => {
+        tap((user) => {
+          localStorage.setItem('user', JSON.stringify(user));
+          this.userSubject.next(user);
+          return user;
+        })
+      );
+  }
+
+  signUp(username: string, password: string): Observable<User> {
+    return this.http
+      .post<any>(`${environment.apiUrl}/users/register`, {
+        username,
+        password,
+      })
+      .pipe(
+        tap((user) => {
+          console.log({ ...user });
           localStorage.setItem('user', JSON.stringify(user));
           this.userSubject.next(user);
           return user;

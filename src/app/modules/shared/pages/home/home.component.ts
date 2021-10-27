@@ -11,6 +11,14 @@ export class HomeComponent {
   constructor(private router: Router) {}
 
   onClickBtnRegistrar(): void {
+    this.goToRegisterPage();
+  }
+
+  onEnterInput(): void {
+    this.goToRegisterPage();
+  }
+
+  private goToRegisterPage(): void {
     this.router.navigate(['/register'], {
       queryParams: { email: this.email },
     });

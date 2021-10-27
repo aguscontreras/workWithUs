@@ -25,6 +25,7 @@
                 placeholder="Correo electrónico"
                 class="form-group__form-control--fluid"
                 [(ngModel)]="email"
+                (keyup.enter)="onEnterInput()"
               />
             </div>
 

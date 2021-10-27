@@ -4,11 +4,11 @@
   background-position: center center;
   background-repeat: no-repeat;
   height: calc(100vh - 64px);
-  left: 0;
   position: fixed;
+  left: 0;
   right: 0;
+  bottom: 0;
   z-index: 1;
-  margin-top: 64px;
 }
 
 .main-wrapper {
@@ -20,12 +20,11 @@
     rgba(68, 43, 33, 0) 100%
   );
   padding-top: 40px;
-  top: 0;
+  bottom: 0;
   left: 0;
-  position: fixed;
   right: 0;
+  position: fixed;
   z-index: 2;
-  margin-top: 64px;
 }
 
 @media screen and(min-width: 768px) {

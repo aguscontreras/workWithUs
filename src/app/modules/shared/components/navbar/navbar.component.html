@@ -1,0 +1,30 @@
+<nav class="container-fluid nav">
+  <div class="row align-items-center justify-content-between">
+    <div class="col-4">
+      <div class="logo">
+        <div class="logo__wrapper">
+          <!-- <img
+            src="assets/img/logo.png"
+            alt="Logo Postular"
+            class="logo__img"
+          /> -->
+        </div>
+      </div>
+    </div>
+
+    <div class="col-auto" *ngIf="!isUserLoggedIn">
+      <button
+        pButton
+        label="Registrarme"
+        class="me-3"
+        (click)="onClickBtnRegistrar()"
+      ></button>
+      <button
+        pButton
+        label="Ingresar"
+        class="p-button-secondary"
+        (click)="onClickBtnIngresar()"
+      ></button>
+    </div>
+  </div>
+</nav>

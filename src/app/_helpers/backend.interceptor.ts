@@ -10,35 +10,7 @@ import { Observable, of, throwError } from 'rxjs';
 import { Role } from '../_models/role';
 import { delay, dematerialize, materialize } from 'rxjs/operators';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-
-//  let users = JSON.parse(localStorage.getItem('users')) || [];
-
-const users = [
-  {
-    id: 1,
-    username: 'admin',
-    password: 'admin',
-    firstName: 'Admin',
-    lastName: 'User',
-    role: Role.Admin,
-  },
-  {
-    id: 2,
-    username: 'recruiter',
-    password: 'recruiter',
-    firstName: 'Recruiter',
-    lastName: 'User',
-    role: Role.Recruiter,
-  },
-  {
-    id: 3,
-    username: 'postulante',
-    password: 'postulante',
-    firstName: 'Postulante',
-    lastName: 'User',
-    role: Role.User,
-  },
-];
+import { User } from '../_models';
 
 @Injectable()
 export class BackendInterceptor implements HttpInterceptor {
@@ -62,6 +34,8 @@ export class BackendInterceptor implements HttpInterceptor {
       switch (true) {
         case url.endsWith('users/authenticate') && method === 'POST':
           return authenticate();
+        case url.endsWith('users/register') && method === 'POST':
+          return register();
         case url.endsWith('/users') && method === 'GET':
           return getUsers();
         case url.match(/\/users\/\d+$/) && method === 'GET':
@@ -73,6 +47,7 @@ export class BackendInterceptor implements HttpInterceptor {
 
     function authenticate(): Observable<HttpResponse<unknown>> {
       const { username, password } = body;
+      const users: User[] = JSON.parse(localStorage.getItem('users')) || [];
       const user = users.find(
         (x) => x.username === username && x.password === password
       );
@@ -91,11 +66,30 @@ export class BackendInterceptor implements HttpInterceptor {
       });
     }
 
+    function register(): Observable<HttpResponse<unknown>> {
+      const { username, password } = body;
+
+      if (isRegistered(username)) {
+        return error('La cuenta de correo electrónico ya está registrada.');
+      }
+
+      const currentUsers: User[] = JSON.parse(localStorage.getItem('users'));
+      const newUser = new User(username, password, Role.User);
+      currentUsers.push(newUser);
+      localStorage.setItem('users', JSON.stringify(currentUsers));
+
+      return ok({
+        ...newUser,
+        token: `fake-jwt-token.${newUser.id}`,
+      });
+    }
+
     function getUsers(): Observable<HttpResponse<unknown>> {
       if (!isAdmin()) {
         return unauthorized();
       }
 
+      const users: User[] = JSON.parse(localStorage.getItem('users')) || [];
       return ok(users);
     }
 
@@ -108,6 +102,7 @@ export class BackendInterceptor implements HttpInterceptor {
         return unauthorized();
       }
 
+      const users: User[] = JSON.parse(localStorage.getItem('users')) || [];
       const user = users.find((x) => x.id === idFromUrl());
       return ok(user);
     }
@@ -140,11 +135,17 @@ export class BackendInterceptor implements HttpInterceptor {
       return isLoggedIn() && currentUser().role === Role.Admin;
     }
 
+    function isRegistered(username: string): boolean {
+      const users: User[] = JSON.parse(localStorage.getItem('users')) || [];
+      return users.find((x) => x.username === username) != null;
+    }
+
     function currentUser(): any {
       if (!isLoggedIn()) {
         return;
       }
       const id = parseInt(headers.get('Authorization').split('.')[1], 10);
+      const users: User[] = JSON.parse(localStorage.getItem('users')) || [];
       return users.find((x) => x.id === id);
     }
 

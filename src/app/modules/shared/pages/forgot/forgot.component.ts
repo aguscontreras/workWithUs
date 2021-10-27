@@ -44,12 +44,15 @@ export class ForgotComponent implements OnInit {
       return;
     }
 
+    this.loading = true;
+
     this.authenticationService
       .restorePassword(this.username.value)
       .pipe(first())
       .subscribe({
         next: (result) => {
           if (result === 1) {
+            this.loading = false;
             this.messageService.add({
               severity: 'success',
               summary: 'Correo enviado',
@@ -60,6 +63,7 @@ export class ForgotComponent implements OnInit {
         },
         error: (err: HttpErrorResponse) => {
           this.error = err.error;
+          this.loading = false;
         },
       });
   }

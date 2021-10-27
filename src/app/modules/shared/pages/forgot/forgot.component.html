@@ -1,0 +1,61 @@
+<div class="container">
+  <div class="wrapper">
+    <div class="row">
+      <div class="col-md-5 col-lg-4">
+        <div class="img-wrapper">
+          <img
+            src="/assets/svg/forgot_password.svg"
+            class="img-wrapper__img"
+            alt="Olvidé mi claev"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-5 offset-md-1">
+        <h1>Restablecer contraseña</h1>
+
+        <p>No te preocupes, a todos nos ha pasado alguna vez.</p>
+
+        <p>
+          Te enviaremos un correo electrónico con instrucciones para generar una
+          nueva clave.
+        </p>
+
+        <div class="form-wrapper">
+          <div class="form-group">
+            <label for="txtEmail">Correo electrónico</label>
+            <input
+              type="email"
+              id="txtEmail"
+              [formControl]="username"
+              placeholder="ejemplo@correo.com"
+              pInputText
+            />
+            <small *ngIf="username.invalid && submitted" class="mt-2"
+              >Ingresa un email válido.</small
+            >
+          </div>
+
+          <p *ngIf="error">
+            <i class="pi pi-exclamation-circle"></i> {{ error }}
+          </p>
+
+          <div class="row justify-content-end mt-4">
+            <div class="col-auto">
+              <button
+                pButton
+                icon="pi pi-arrow-right"
+                label="Enviar"
+                type="button"
+                [loading]="loading"
+                (click)="onClickBtnEnviar()"
+              ></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p-toast position="bottom-center"></p-toast>

@@ -1,1 +1,79 @@
-<p>register works!</p>
+<div class="container">
+  <div class="wrapper">
+    <div class="row">
+      <div class="col-md-5 col-lg-4">
+        <div class="img-wrapper">
+          <img
+            src="/assets/svg/undraw_Work_together_re_5yhn.svg"
+            class="img-wrapper__img"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-5 offset-md-1">
+        <h1>Registrarme</h1>
+
+        <p>
+          Estás a un paso de iniciar tu búsqueda laboral. Completá tu registro
+          ingresando un email y una contraseña.
+        </p>
+
+        <div class="form-wrapper">
+          <form [formGroup]="formRegister" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+              <label for="txtEmail">Correo electrónico</label>
+              <input
+                type="email"
+                id="txtEmail"
+                formControlName="username"
+                placeholder="ejemplo@correo.com"
+                pInputText
+              />
+              <small
+                *ngIf="
+                  formRegister.controls['username'].dirty &&
+                  formRegister.controls['username'].invalid
+                "
+                class="mt-2"
+                >Ingresa un email válido.</small
+              >
+            </div>
+
+            <div class="form-group">
+              <label for="txtPassword">Contraseña</label>
+              <input
+                type="password"
+                id="txtPassword"
+                formControlName="password"
+                pInputText
+              />
+              <small
+                *ngIf="
+                  formRegister.controls['password'].dirty &&
+                  formRegister.controls['password'].invalid
+                "
+                class="mt-2"
+                >Este campo es requerido.</small
+              >
+            </div>
+
+            <div class="row justify-content-end mt-4">
+              <div class="col-auto">
+                <button
+                  pButton
+                  icon="pi pi-arrow-right"
+                  label="Continuar"
+                  type="submit"
+                ></button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <p class="text-center mt-4">
+          ¿Ya estás registrado/a? Ingresá desde <a [routerLink]="'/login'">acá</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

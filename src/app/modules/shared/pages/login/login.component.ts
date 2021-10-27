@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {
   AbstractControl,
@@ -12,7 +13,7 @@ import { AuthenticationService } from '../../../../_services';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styles: [],
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
@@ -68,8 +69,8 @@ export class LoginComponent implements OnInit {
           this.router.navigateByUrl(returnUrl);
         },
 
-        error: (err) => {
-          this.error = err;
+        error: (err: HttpErrorResponse) => {
+          this.error = err.error;
           this.loading = false;
           console.error(err);
         },

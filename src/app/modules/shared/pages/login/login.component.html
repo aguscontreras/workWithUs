@@ -1,17 +1,93 @@
-<div class="card">
-  <h5>Ingresar</h5>
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <div class="p-fluid">
-      <div class="p-field">
-        <label for="username">Username</label>
-        <input type="text" pInputText formControlName="username" />
+<div class="container">
+  <div class="wrapper">
+    <div class="row">
+      <div class="col-md-5 col-lg-4">
+        <div class="img-wrapper">
+          <img
+            src="/assets/svg/login.svg"
+            class="img-wrapper__img"
+            alt="Ingresar"
+          />
+        </div>
       </div>
-      <div class="p-field">
-        <label for="password">Password</label>
-        <input type="password" pInputText formControlName="password" />
+
+      <div class="col-md-5 offset-md-1">
+        <h1>Ingresar</h1>
+
+        <div class="form-wrapper">
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+              <label for="txtEmail">Correo electrónico</label>
+              <input
+                type="email"
+                id="txtEmail"
+                formControlName="username"
+                placeholder="ejemplo@correo.com"
+                pInputText
+              />
+              <small
+                *ngIf="
+                  (loginForm.controls['username'].dirty &&
+                    loginForm.controls['username'].invalid) ||
+                  (submitted && loginForm.controls['username'].invalid)
+                "
+                class="mt-2"
+                >Ingresa un email válido.</small
+              >
+            </div>
+
+            <div class="form-group">
+              <label for="txtPassword">Contraseña</label>
+              <input
+                type="password"
+                id="txtPassword"
+                formControlName="password"
+                pInputText
+              />
+              <small
+                *ngIf="
+                  (loginForm.controls['password'].dirty &&
+                    loginForm.controls['password'].invalid) ||
+                  (submitted && loginForm.controls['password'].invalid)
+                "
+                class="mt-2"
+                >Este campo es requerido.</small
+              >
+            </div>
+
+            <p *ngIf="error">
+              <i class="pi pi-exclamation-circle"></i> {{ error }}
+            </p>
+
+            <div class="row justify-content-end mt-4">
+              <div class="col-auto">
+                <button
+                  pButton
+                  icon="pi pi-arrow-right"
+                  label="Continuar"
+                  type="submit"
+                  [loading]="loading"
+                ></button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <p class="text-center mt-4">
+          ¿No tenes usuario? Registrate desde
+          <a [routerLink]="'/register'">acá</a>
+        </p>
+
+        <p class="text-center">
+          <a
+            [routerLink]="'/forgot'"
+            [queryParams]="{
+              email: loginForm.controls['username'].value || null
+            }"
+            >Olvidé mi contraseña</a
+          >
+        </p>
       </div>
     </div>
-
-    <button pButton label="Ingresar" type="submit"></button>
-  </form>
+  </div>
 </div>

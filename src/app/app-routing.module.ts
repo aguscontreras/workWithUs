@@ -7,6 +7,7 @@ import { RegisterComponent } from './modules/shared/pages/register/register.comp
 import { ForgotComponent } from './modules/shared/pages/forgot/forgot.component';
 import { PostulantPanelComponent } from './modules/postulant/pages/postulant-panel/postulant-panel.component';
 import { Role } from './_models';
+import { AuthGuard } from './_helpers';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -17,6 +18,7 @@ const routes: Routes = [
     path: 'postulant',
     component: PostulantPanelComponent,
     data: { roles: [Role.User] },
+    canActivate: [AuthGuard],
   },
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: '**', component: NotFoundComponent },

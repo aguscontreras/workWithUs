@@ -11,6 +11,7 @@ import { PrimengModule } from './modules/primeng/primeng.module';
 import { SharedModule } from './modules/shared/shared.module';
 import { fakeBackendProvider } from './_helpers';
 import { RouterModule } from '@angular/router';
+import { PostulantModule } from './modules/postulant/postulant.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,6 +25,7 @@ import { RouterModule } from '@angular/router';
     ReactiveFormsModule,
     PrimengModule,
     SharedModule,
+    PostulantModule,
   ],
   providers: [fakeBackendProvider],
   bootstrap: [AppComponent],

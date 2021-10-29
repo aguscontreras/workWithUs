@@ -1,0 +1,272 @@
+<form [formGroup]="resumeForm" (ngSubmit)="onSubmit()">
+  <h3 class="mb-2 mt-4">Información básica</h3>
+
+  <div class="row row-cols-md-2 row-cols-xl-3" formGroupName="personalInfo">
+    <div class="col form-group">
+      <label for="firstName" class="form-group__label">Nombre/s</label>
+      <input
+        pInputText
+        type="text"
+        id="firstName"
+        formControlName="firstName"
+        aria-describedby="firstName-help"
+        class="form-group__input"
+      />
+      <small
+        id="firstName-help"
+        class="form-group__helper"
+        *ngIf="personalInfo['firstName'].invalid && submitted"
+        >Completa este campo.</small
+      >
+    </div>
+
+    <div class="col form-group">
+      <label for="lastName" class="form-group__label">Apellido/s</label>
+      <input
+        pInputText
+        type="text"
+        id="lastName"
+        formControlName="lastName"
+        aria-describedby="lastName-help"
+        class="form-group__input"
+      />
+      <small
+        id="lastName-help"
+        class="form-group__helper"
+        *ngIf="personalInfo['lastName'].invalid && submitted"
+        >Completa este campo.</small
+      >
+    </div>
+
+    <div class="col form-group">
+      <label for="birthDate" class="form-group__label"
+        >Fecha de nacimiento</label
+      >
+      <input
+        pInputText
+        type="date"
+        id="birthDate"
+        formControlName="birthDate"
+        aria-describedby="birthDate-help"
+        class="form-group__input"
+      />
+      <small
+        id="birthDate-help"
+        class="form-group__helper"
+        *ngIf="personalInfo['birthDate'].invalid && submitted"
+        >Completa este campo.</small
+      >
+    </div>
+
+    <div class="col form-group">
+      <label for="personalIdType" class="form-group__label"
+        >Tipo de Identificación</label
+      >
+
+      <p-dropdown
+        inputId="personalIdType"
+        styleClass="form-group__input"
+        formControlName="personalIdType"
+        aria-describedby="personalIdType-help"
+      ></p-dropdown>
+
+      <small
+        id="personalIdType-help"
+        class="form-group__helper"
+        *ngIf="personalInfo['personalIdType'].invalid && submitted"
+        >Completa este campo.</small
+      >
+    </div>
+
+    <div class="col form-group">
+      <label for="personalId" class="form-group__label"
+        >Número de Identificación</label
+      >
+      <input
+        pInputText
+        type="number"
+        id="personalId"
+        formControlName="personalId"
+        aria-describedby="personalId-help"
+        class="form-group__input"
+      />
+      <small
+        id="personalId-help"
+        class="form-group__helper"
+        *ngIf="personalInfo['personalId'].invalid && submitted"
+        >Completa este campo.</small
+      >
+    </div>
+  </div>
+
+  <h3 class="mb-2 mt-4">Dirección</h3>
+
+  <div class="row row-cols-md-2 row-cols-xl-3" formGroupName="contactInfo">
+    <div class="col form-group">
+      <label for="email" class="form-group__label">Correo electrónico</label>
+      <input
+        pInputText
+        type="email"
+        id="email"
+        formControlName="email"
+        aria-describedby="email-help"
+        class="form-group__input"
+        readonly
+      />
+      <small
+        id="email-help"
+        class="form-group__helper"
+        *ngIf="contactInfo['email'].invalid && submitted"
+        >Completa este campo.</small
+      >
+    </div>
+
+    <div class="col form-group">
+      <label for="areaCode" class="form-group__label">Número de teléfono</label>
+
+      <div class="row">
+        <div class="col-4 pe-2">
+          <input
+            pInputText
+            type="number"
+            id="areaCode"
+            formControlName="areaCode"
+            aria-describedby="areaCode-help"
+            class="form-group__input"
+          />
+        </div>
+
+        <div class="col ps-0">
+          <input
+            pInputText
+            type="tel"
+            id="phoneNumber"
+            formControlName="phoneNumber"
+            aria-describedby="phoneNumber-help"
+            class="form-group__input"
+          />
+        </div>
+      </div>
+
+      <small
+        id="phoneNumber-help"
+        class="form-group__helper"
+        *ngIf="
+          (contactInfo['areaCode'].invalid ||
+            contactInfo['phoneNumber'].invalid) &&
+          submitted
+        "
+        >Completa este campo.</small
+      >
+    </div>
+
+    <div class="col form-group">
+      <label for="areaCodeAlt" class="form-group__label"
+        >Número de teléfono alternativo</label
+      >
+
+      <div class="row">
+        <div class="col-4 pe-2">
+          <input
+            pInputText
+            type="number"
+            id="areaCodeAlt"
+            formControlName="areaCodeAlt"
+            aria-describedby="areaCodeAlt-help"
+            class="form-group__input"
+          />
+        </div>
+
+        <div class="col ps-0">
+          <input
+            pInputText
+            type="tel"
+            id="phoneNumberAlt"
+            formControlName="phoneNumberAlt"
+            aria-describedby="phoneNumberAlt-help"
+            class="form-group__input"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="mb-2 mt-4">Contacto</h3>
+
+  <div class="row row-cols-md-2 row-cols-xl-3" formGroupName="adress">
+    <div class="col form-group">
+      <label for="street" class="form-group__label">Calle</label>
+      <input
+        pInputText
+        type="text"
+        id="street"
+        formControlName="street"
+        aria-describedby="street-help"
+        class="form-group__input"
+      />
+    </div>
+
+    <div class="col form-group">
+      <label for="number" class="form-group__label">Número</label>
+      <input
+        pInputText
+        type="number"
+        id="number"
+        formControlName="number"
+        aria-describedby="number-help"
+        class="form-group__input"
+      />
+    </div>
+
+    <div class="col form-group">
+      <label for="country" class="form-group__label">País</label>
+      <p-dropdown
+        inputId="country"
+        styleClass="form-group__input"
+        formControlName="country"
+      ></p-dropdown>
+    </div>
+
+    <div class="col form-group">
+      <label for="state" class="form-group__label">Provincia</label>
+      <p-dropdown
+        inputId="state"
+        styleClass="form-group__input"
+        formControlName="state"
+      ></p-dropdown>
+    </div>
+
+    <div class="col form-group">
+      <label for="region" class="form-group__label">Localidad</label>
+      <p-dropdown
+        inputId="region"
+        styleClass="form-group__input"
+        formControlName="region"
+      ></p-dropdown>
+    </div>
+
+    <div class="col form-group">
+      <label for="postal" class="form-group__label">Código postal</label>
+      <input
+        pInputText
+        type="number"
+        id="postal"
+        formControlName="postal"
+        aria-describedby="postal-help"
+        class="form-group__input"
+      />
+    </div>
+  </div>
+
+  <div class="row my-5 justify-content-end">
+    <div class="col-auto">
+      <button
+        pButton
+        type="submit"
+        icon="pi pi-save"
+        label="Guardar cambios"
+        [disabled]="resumeForm.pristine"
+      ></button>
+    </div>
+  </div>
+</form>

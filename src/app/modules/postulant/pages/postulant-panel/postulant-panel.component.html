@@ -1,1 +1,24 @@
-<p>postulant-panel works!</p>
+<div class="container-fluid">
+  <div class="row">
+    <aside class="col-md-4 col-lg-3 col-xl-2">Menu</aside>
+    <main class="col">
+      <section>
+        <h1>Mis datos</h1>
+        <p>
+          Desde acá podes administrar tus datos personales y laborales. Recordá
+          mantenerlos actualizados.
+        </p>
+
+        <p-tabView styleClass="mt-4">
+          <p-tabPanel header="Datos Personales">
+            <app-personal-data-form></app-personal-data-form>
+          </p-tabPanel>
+          <p-tabPanel header="Estudios"> Content 2 </p-tabPanel>
+          <p-tabPanel header="Experiencia laboral"> Content 3 </p-tabPanel>
+        </p-tabView>
+      </section>
+    </main>
+
+    <aside class="d-none d-lg-block col-lg-3 col-xl-2">dsadsa</aside>
+  </div>
+</div>

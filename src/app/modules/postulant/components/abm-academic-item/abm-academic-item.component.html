@@ -1,0 +1,129 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <p-panel header="Datos">
+        <div class="row row-cols-md-2 row-cols-xl-3">
+          <div class="col form-group">
+            <label
+              for="centerName"
+              class="form-group__label form-group__label--required"
+              >Centro educativo</label
+            >
+            <input
+              pInputText
+              type="text"
+              id="centerName"
+              aria-describedby="centerName-help"
+              class="form-group__input"
+            />
+            <small id="centerName-help" class="form-group__helper"
+              >Completa este campo.</small
+            >
+          </div>
+
+          <div class="col form-group">
+            <label
+              for="level"
+              class="form-group__label form-group__label--required"
+              >Nivel de estudios</label
+            >
+
+            <p-dropdown
+              inputId="level"
+              styleClass="form-group__input"
+              aria-describedby="level-help"
+            ></p-dropdown>
+
+            <small id="level-help" class="form-group__helper"
+              >Completa este campo.</small
+            >
+          </div>
+
+          <div class="col form-group">
+            <label class="form-group__label form-group__label--required"
+              >Estado</label
+            >
+
+            <p-dropdown
+              [options]="states"
+              inputId="level"
+              styleClass="form-group__input"
+              aria-describedby="level-help"
+            ></p-dropdown>
+
+            <small id="level-help" class="form-group__helper"
+              >Completa este campo.</small
+            >
+          </div>
+
+          <div class="col form-group">
+            <label class="form-group__label form-group__label--required"
+              >Período desde</label
+            >
+
+            <div class="row">
+              <div class="col pr-2">
+                <p-dropdown
+                  styleClass="form-group__input"
+                  aria-describedby="level-help"
+                  placeholder="Mes"
+                ></p-dropdown>
+              </div>
+              <div class="col pl-0">
+                <p-dropdown
+                  styleClass="form-group__input"
+                  aria-describedby="level-help"
+                  placeholder="Año"
+                ></p-dropdown>
+              </div>
+            </div>
+
+            <small id="level-help" class="form-group__helper"
+              >Completa este campo.</small
+            >
+          </div>
+
+          <div class="col form-group">
+            <label class="form-group__label form-group__label--required"
+              >Período hasta</label
+            >
+
+            <div class="row">
+              <div class="col pr-2">
+                <p-dropdown
+                  styleClass="form-group__input"
+                  aria-describedby="level-help"
+                  placeholder="Mes"
+                ></p-dropdown>
+              </div>
+              <div class="col pl-0">
+                <p-dropdown
+                  styleClass="form-group__input"
+                  aria-describedby="level-help"
+                  placeholder="Año"
+                ></p-dropdown>
+              </div>
+            </div>
+
+            <small id="level-help" class="form-group__helper"
+              >Completa este campo.</small
+            >
+          </div>
+        </div>
+
+        <ng-template pTemplate="footer">
+          <div class="row justify-content-end">
+            <div class="col-auto">
+              <button
+                pButton
+                icon="pi pi-save"
+                label="Guardar"
+                type="button"
+              ></button>
+            </div>
+          </div>
+        </ng-template>
+      </p-panel>
+    </div>
+  </div>
+</div>

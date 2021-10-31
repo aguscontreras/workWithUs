@@ -1,7 +1,7 @@
 <form [formGroup]="resumeForm" (ngSubmit)="onSubmit()">
   <h3 class="mb-2 mt-4">Información básica</h3>
 
-  <div class="row row-cols-md-2 row-cols-xl-3" formGroupName="personalInfo">
+  <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3" formGroupName="personalInfo">
     <div class="col form-group">
       <label for="firstName" class="form-group__label">Nombre/s</label>
       <input
@@ -101,7 +101,7 @@
 
   <h3 class="mb-2 mt-4">Dirección</h3>
 
-  <div class="row row-cols-md-2 row-cols-xl-3" formGroupName="contactInfo">
+  <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3" formGroupName="contactInfo">
     <div class="col form-group">
       <label for="email" class="form-group__label">Correo electrónico</label>
       <input
@@ -133,6 +133,7 @@
             formControlName="areaCode"
             aria-describedby="areaCode-help"
             class="form-group__input"
+            min="0"
           />
         </div>
 
@@ -174,6 +175,7 @@
             formControlName="areaCodeAlt"
             aria-describedby="areaCodeAlt-help"
             class="form-group__input"
+            min="0"
           />
         </div>
 
@@ -193,7 +195,7 @@
 
   <h3 class="mb-2 mt-4">Contacto</h3>
 
-  <div class="row row-cols-md-2 row-cols-xl-3" formGroupName="adress">
+  <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3" formGroupName="adress">
     <div class="col form-group">
       <label for="street" class="form-group__label">Calle</label>
       <input

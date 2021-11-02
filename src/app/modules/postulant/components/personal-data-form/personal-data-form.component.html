@@ -3,97 +3,97 @@
 
   <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3" formGroupName="personalInfo">
     <div class="col form-group">
-      <label for="firstName" class="form-group__label">Nombre/s</label>
+      <label for="nombre" class="form-group__label">Nombre/s</label>
       <input
         pInputText
         type="text"
-        id="firstName"
-        formControlName="firstName"
-        aria-describedby="firstName-help"
+        id="nombre"
+        formControlName="nombre"
+        aria-describedby="nombre-help"
         class="form-group__input"
       />
       <small
-        id="firstName-help"
+        id="nombre-help"
         class="form-group__helper"
-        *ngIf="personalInfo['firstName'].invalid && submitted"
+        *ngIf="personalInfo['nombre'].invalid && submitted"
         >Completa este campo.</small
       >
     </div>
 
     <div class="col form-group">
-      <label for="lastName" class="form-group__label">Apellido/s</label>
+      <label for="apellido" class="form-group__label">Apellido/s</label>
       <input
         pInputText
         type="text"
-        id="lastName"
-        formControlName="lastName"
-        aria-describedby="lastName-help"
+        id="apellido"
+        formControlName="apellido"
+        aria-describedby="apellido-help"
         class="form-group__input"
       />
       <small
-        id="lastName-help"
+        id="apellido-help"
         class="form-group__helper"
-        *ngIf="personalInfo['lastName'].invalid && submitted"
+        *ngIf="personalInfo['apellido'].invalid && submitted"
         >Completa este campo.</small
       >
     </div>
 
     <div class="col form-group">
-      <label for="birthDate" class="form-group__label"
+      <label for="fechaNacimiento" class="form-group__label"
         >Fecha de nacimiento</label
       >
       <input
         pInputText
         type="date"
-        id="birthDate"
-        formControlName="birthDate"
-        aria-describedby="birthDate-help"
+        id="fechaNacimiento"
+        formControlName="fechaNacimiento"
+        aria-describedby="fechaNacimiento-help"
         class="form-group__input"
       />
       <small
-        id="birthDate-help"
+        id="fechaNacimiento-help"
         class="form-group__helper"
-        *ngIf="personalInfo['birthDate'].invalid && submitted"
+        *ngIf="personalInfo['fechaNacimiento'].invalid && submitted"
         >Completa este campo.</small
       >
     </div>
 
     <div class="col form-group">
-      <label for="personalIdType" class="form-group__label"
+      <label for="tipoDocumento" class="form-group__label"
         >Tipo de Identificación</label
       >
 
       <p-dropdown
-        inputId="personalIdType"
+        inputId="tipoDocumento"
         styleClass="form-group__input"
-        formControlName="personalIdType"
-        aria-describedby="personalIdType-help"
+        formControlName="tipoDocumento"
+        aria-describedby="tipoDocumento-help"
       ></p-dropdown>
 
       <small
-        id="personalIdType-help"
+        id="tipoDocumento-help"
         class="form-group__helper"
-        *ngIf="personalInfo['personalIdType'].invalid && submitted"
+        *ngIf="personalInfo['tipoDocumento'].invalid && submitted"
         >Completa este campo.</small
       >
     </div>
 
     <div class="col form-group">
-      <label for="personalId" class="form-group__label"
+      <label for="documento" class="form-group__label"
         >Número de Identificación</label
       >
       <input
         pInputText
         type="number"
-        id="personalId"
-        formControlName="personalId"
-        aria-describedby="personalId-help"
+        id="documento"
+        formControlName="documento"
+        aria-describedby="documento-help"
         class="form-group__input"
       />
       <small
-        id="personalId-help"
+        id="documento-help"
         class="form-group__helper"
-        *ngIf="personalInfo['personalId'].invalid && submitted"
+        *ngIf="personalInfo['documento'].invalid && submitted"
         >Completa este campo.</small
       >
     </div>
@@ -122,16 +122,16 @@
     </div>
 
     <div class="col form-group">
-      <label for="areaCode" class="form-group__label">Número de teléfono</label>
+      <label for="codArea" class="form-group__label">Número de teléfono</label>
 
       <div class="row">
         <div class="col-4 pe-2">
           <input
             pInputText
             type="number"
-            id="areaCode"
-            formControlName="areaCode"
-            aria-describedby="areaCode-help"
+            id="codArea"
+            formControlName="codArea"
+            aria-describedby="codArea-help"
             class="form-group__input"
             min="0"
           />
@@ -141,20 +141,20 @@
           <input
             pInputText
             type="tel"
-            id="phoneNumber"
-            formControlName="phoneNumber"
-            aria-describedby="phoneNumber-help"
+            id="telefono"
+            formControlName="telefono"
+            aria-describedby="telefono-help"
             class="form-group__input"
           />
         </div>
       </div>
 
       <small
-        id="phoneNumber-help"
+        id="telefono-help"
         class="form-group__helper"
         *ngIf="
-          (contactInfo['areaCode'].invalid ||
-            contactInfo['phoneNumber'].invalid) &&
+          (contactInfo['codArea'].invalid ||
+            contactInfo['telefono'].invalid) &&
           submitted
         "
         >Completa este campo.</small
@@ -162,7 +162,7 @@
     </div>
 
     <div class="col form-group">
-      <label for="areaCodeAlt" class="form-group__label"
+      <label for="codAreaAlt" class="form-group__label"
         >Número de teléfono alternativo</label
       >
 
@@ -171,9 +171,9 @@
           <input
             pInputText
             type="number"
-            id="areaCodeAlt"
-            formControlName="areaCodeAlt"
-            aria-describedby="areaCodeAlt-help"
+            id="codAreaAlt"
+            formControlName="codAreaAlt"
+            aria-describedby="codAreaAlt-help"
             class="form-group__input"
             min="0"
           />
@@ -183,9 +183,9 @@
           <input
             pInputText
             type="tel"
-            id="phoneNumberAlt"
-            formControlName="phoneNumberAlt"
-            aria-describedby="phoneNumberAlt-help"
+            id="telefonoAlt"
+            formControlName="telefonoAlt"
+            aria-describedby="telefonoAlt-help"
             class="form-group__input"
           />
         </div>
@@ -197,53 +197,53 @@
 
   <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3" formGroupName="adress">
     <div class="col form-group">
-      <label for="street" class="form-group__label">Calle</label>
+      <label for="calle" class="form-group__label">Calle</label>
       <input
         pInputText
         type="text"
-        id="street"
-        formControlName="street"
-        aria-describedby="street-help"
+        id="calle"
+        formControlName="calle"
+        aria-describedby="calle-help"
         class="form-group__input"
       />
     </div>
 
     <div class="col form-group">
-      <label for="number" class="form-group__label">Número</label>
+      <label for="numero" class="form-group__label">Número</label>
       <input
         pInputText
         type="number"
-        id="number"
-        formControlName="number"
-        aria-describedby="number-help"
+        id="numero"
+        formControlName="numero"
+        aria-describedby="numero-help"
         class="form-group__input"
       />
     </div>
 
     <div class="col form-group">
-      <label for="country" class="form-group__label">País</label>
+      <label for="pais" class="form-group__label">País</label>
       <p-dropdown
-        inputId="country"
+        inputId="pais"
         styleClass="form-group__input"
-        formControlName="country"
+        formControlName="pais"
       ></p-dropdown>
     </div>
 
     <div class="col form-group">
-      <label for="state" class="form-group__label">Provincia</label>
+      <label for="provincia" class="form-group__label">Provincia</label>
       <p-dropdown
-        inputId="state"
+        inputId="provincia"
         styleClass="form-group__input"
-        formControlName="state"
+        formControlName="provincia"
       ></p-dropdown>
     </div>
 
     <div class="col form-group">
-      <label for="region" class="form-group__label">Localidad</label>
+      <label for="localidad" class="form-group__label">Localidad</label>
       <p-dropdown
-        inputId="region"
+        inputId="localidad"
         styleClass="form-group__input"
-        formControlName="region"
+        formControlName="localidad"
       ></p-dropdown>
     </div>
 

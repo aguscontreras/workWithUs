@@ -8,9 +8,24 @@ import { AcademicDataComponent } from './components/academic-data/academic-data.
 import { EmploymentDataComponent } from './components/employment-data/employment-data.component';
 import { AbmAcademicItemComponent } from './components/abm-academic-item/abm-academic-item.component';
 import { AcademicListItemComponent } from './components/academic-list-item/academic-list-item.component';
+import { DirectivesModule } from '../../_directives/_directives.module';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
-  declarations: [PostulantPanelComponent, PersonalDataFormComponent, AcademicDataComponent, EmploymentDataComponent, AbmAcademicItemComponent, AcademicListItemComponent],
-  imports: [CommonModule, PrimengModule, ReactiveFormsModule],
+  declarations: [
+    PostulantPanelComponent,
+    PersonalDataFormComponent,
+    AcademicDataComponent,
+    EmploymentDataComponent,
+    AbmAcademicItemComponent,
+    AcademicListItemComponent,
+  ],
+  imports: [
+    CommonModule,
+    PrimengModule,
+    ReactiveFormsModule,
+    DirectivesModule,
+    SharedModule,
+  ],
 })
 export class PostulantModule {}

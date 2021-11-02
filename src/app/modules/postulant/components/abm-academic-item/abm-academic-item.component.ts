@@ -1,5 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import {
+  FormGroup,
+  FormBuilder,
+  Validators,
+  AbstractControl,
+} from '@angular/forms';
+import { SelectItem } from 'primeng/api';
+import { AcademicLevel } from '../../../../_models';
+import { AcademicStates } from '../../../../_models/academicStates';
+import { DropdownYearDirective } from '../../../../_directives/dropdowns/dropdown-year.directive';
 
 @Component({
   selector: 'app-abm-academic-item',
@@ -7,20 +17,68 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
   styleUrls: ['./abm-academic-item.component.scss'],
 })
 export class AbmAcademicItemComponent implements OnInit {
-  states: { label: string; value: string }[];
+  states: SelectItem[];
+  levels: SelectItem[];
+  academicDataForm: FormGroup;
+  submitted: boolean;
+  @ViewChild('anioHasta', { read: DropdownYearDirective })
+  private anioHasta: DropdownYearDirective;
 
   constructor(
     private config: DynamicDialogConfig,
-    private ref: DynamicDialogRef
+    private ref: DynamicDialogRef,
+    private formBuilder: FormBuilder
   ) {
     this.config.width = '65%';
   }
 
   ngOnInit(): void {
     this.states = [
-      { label: 'Culminado', value: 'CUL' },
-      { label: 'Cursando', value: 'CUR' },
-      { label: 'Aplazado', value: 'APL' },
+      { label: 'Culminado', value: AcademicStates.Culminado },
+      { label: 'Cursando', value: AcademicStates.Cursando },
+      { label: 'Aplazado', value: AcademicStates.Aplazado },
     ];
+
+    this.levels = [
+      { label: 'Primaria', value: AcademicLevel.Primaria },
+      { label: 'Secundaria', value: AcademicLevel.Secundaria },
+      { label: 'Terciario', value: AcademicLevel.Terciario },
+      { label: 'Universitario', value: AcademicLevel.Universitario },
+      { label: 'Posgrado', value: AcademicLevel.Posgrado },
+      { label: 'Master', value: AcademicLevel.Master },
+      { label: 'Doctorado', value: AcademicLevel.Doctorado },
+    ];
+
+    this.createForm();
+  }
+
+  createForm(): void {
+    this.academicDataForm = this.formBuilder.group({
+      centroEducativo: ['', Validators.required],
+      nivel: [AcademicLevel.Primaria, Validators.required],
+      estado: [AcademicStates.Cursando, Validators.required],
+      mesDesde: ['', Validators.required],
+      anioDesde: ['', Validators.required],
+      mesHasta: ['', Validators.required],
+      anioHasta: ['', Validators.required],
+    });
+  }
+
+  get f(): {
+    [key: string]: AbstractControl;
+  } {
+    return this.academicDataForm.controls;
+  }
+
+  onSubmit(): void {
+    console.log(this.academicDataForm.value);
+    this.submitted = true;
+    if (this.academicDataForm.valid) {
+      this.ref.close({ ...this.academicDataForm.value });
+    }
+  }
+
+  handleChangeAnioDesde(anioDesde: string | number): void {
+    this.anioHasta.refreshByYear(Number(anioDesde));
   }
 }

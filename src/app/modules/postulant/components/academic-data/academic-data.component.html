@@ -12,10 +12,7 @@
 </div>
 
 <ul class="mt-5 p-0">
-  <li>
-    <app-academic-list-item></app-academic-list-item>
-  </li>
-  <li>
-    <app-academic-list-item></app-academic-list-item>
+  <li *ngFor="let item of academicItems">
+    <app-academic-list-item [academicItem]="item"></app-academic-list-item>
   </li>
 </ul>

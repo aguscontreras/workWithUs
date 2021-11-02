@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AcademicItem } from '../../../../_models';
+import { DialogService } from 'primeng/dynamicdialog';
+import { AbmAcademicItemComponent } from '../abm-academic-item/abm-academic-item.component';
 
 @Component({
   selector: 'app-academic-list-item',
@@ -12,7 +14,16 @@ import { AcademicItem } from '../../../../_models';
 export class AcademicListItemComponent implements OnInit {
   @Input() academicItem: AcademicItem;
 
-  constructor() {}
+  constructor(private dialogService: DialogService) {}
 
   ngOnInit(): void {}
+
+  handleClickBtnEditItem(): void {
+    this.dialogService.open(AbmAcademicItemComponent, {
+      header: 'Editar formación académica',
+      data: {
+        selectedItem: this.academicItem,
+      },
+    });
+  }
 }

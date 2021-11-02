@@ -10,6 +10,7 @@ import { SelectItem } from 'primeng/api';
 import { AcademicLevel } from '../../../../_models';
 import { AcademicStates } from '../../../../_models/academicStates';
 import { DropdownYearDirective } from '../../../../_directives/dropdowns/dropdown-year.directive';
+import { AcademicItem } from '../../../../_models/academicItem';
 
 @Component({
   selector: 'app-abm-academic-item',
@@ -20,6 +21,7 @@ export class AbmAcademicItemComponent implements OnInit {
   states: SelectItem[];
   levels: SelectItem[];
   academicDataForm: FormGroup;
+  selectedItem: AcademicItem;
   submitted: boolean;
   @ViewChild('anioHasta', { read: DropdownYearDirective })
   private anioHasta: DropdownYearDirective;
@@ -50,6 +52,11 @@ export class AbmAcademicItemComponent implements OnInit {
     ];
 
     this.createForm();
+
+    if (this.config.data.selectedItem) {
+      this.selectedItem = this.config.data.selectedItem;
+      this.setData();
+    }
   }
 
   createForm(): void {
@@ -68,6 +75,18 @@ export class AbmAcademicItemComponent implements OnInit {
     [key: string]: AbstractControl;
   } {
     return this.academicDataForm.controls;
+  }
+
+  private setData(): void {
+    this.academicDataForm.patchValue({
+      centroEducativo: this.selectedItem.centroEducativo,
+      nivel: this.selectedItem.nivel,
+      estado: this.selectedItem.estado,
+      mesDesde: this.selectedItem.mesDesde,
+      anioDesde: this.selectedItem.anioDesde,
+      mesHasta: this.selectedItem.mesHasta,
+      anioHasta: this.selectedItem.anioHasta,
+    });
   }
 
   onSubmit(): void {

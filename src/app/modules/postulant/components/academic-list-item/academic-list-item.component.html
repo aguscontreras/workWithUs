@@ -16,7 +16,9 @@
         pButton
         type="button"
         icon="pi pi-trash"
+        id="btnDeleteItem"
         class="p-button-outlined p-button-secondary p-button-text"
+        (click)="handleClickBtnDeleteItem()"
       ></button>
     </div>
   </div>
@@ -41,3 +43,5 @@
     </div>
   </div>
 </article>
+
+<p-confirmDialog key="deleteItem"></p-confirmDialog>

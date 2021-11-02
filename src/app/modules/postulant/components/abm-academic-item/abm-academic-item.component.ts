@@ -53,7 +53,7 @@ export class AbmAcademicItemComponent implements OnInit {
 
     this.createForm();
 
-    if (this.config.data.selectedItem) {
+    if (this.config.data?.selectedItem) {
       this.selectedItem = this.config.data.selectedItem;
       this.setData();
     }

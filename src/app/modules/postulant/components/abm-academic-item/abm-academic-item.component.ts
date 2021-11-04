@@ -31,7 +31,7 @@ export class AbmAcademicItemComponent implements OnInit {
     private ref: DynamicDialogRef,
     private formBuilder: FormBuilder
   ) {
-    this.config.width = '65%';
+    this.config.width = '75%';
   }
 
   ngOnInit(): void {
@@ -66,8 +66,8 @@ export class AbmAcademicItemComponent implements OnInit {
       estado: [AcademicStates.Cursando, Validators.required],
       mesDesde: ['', Validators.required],
       anioDesde: ['', Validators.required],
-      mesHasta: ['', Validators.required],
-      anioHasta: ['', Validators.required],
+      mesHasta: [{ value: '', disabled: true }],
+      anioHasta: [{ value: '', disabled: true }],
     });
   }
 
@@ -99,5 +99,19 @@ export class AbmAcademicItemComponent implements OnInit {
 
   handleChangeAnioDesde(anioDesde: string | number): void {
     this.anioHasta.refreshByYear(Number(anioDesde));
+  }
+
+  handleChangeEstado(): void {
+    if (this.f.estado.value !== AcademicStates.Cursando) {
+      this.f.mesHasta.enable();
+      this.f.anioHasta.enable();
+      this.f.mesHasta.setValidators(Validators.required);
+      this.f.anioHasta.setValidators(Validators.required);
+      this.f.mesHasta.updateValueAndValidity();
+      this.f.anioHasta.updateValueAndValidity();
+    } else {
+      this.f.mesHasta.disable();
+      this.f.anioHasta.disable();
+    }
   }
 }

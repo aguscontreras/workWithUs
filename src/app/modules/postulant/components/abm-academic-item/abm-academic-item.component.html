@@ -57,6 +57,7 @@
           formControlName="estado"
           styleClass="form-group__input"
           aria-describedby="estado-help"
+          (onChange)="handleChangeEstado()"
         ></p-dropdown>
 
         <small
@@ -110,7 +111,10 @@
       <div class="col form-group">
         <label
           for="mesHasta"
-          class="form-group__label form-group__label--required"
+          [ngClass]="{
+            'form-group__label': true,
+            'form-group__label--required': f.mesHasta.enabled
+          }"
           >Período hasta</label
         >
 

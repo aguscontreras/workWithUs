@@ -10,6 +10,7 @@ import { AbmAcademicItemComponent } from './components/abm-academic-item/abm-aca
 import { AcademicListItemComponent } from './components/academic-list-item/academic-list-item.component';
 import { DirectivesModule } from '../../_directives/_directives.module';
 import { SharedModule } from '../shared/shared.module';
+import { AbmEmploymentItemComponent } from './components/abm-employment-item/abm-employment-item.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { SharedModule } from '../shared/shared.module';
     EmploymentDataComponent,
     AbmAcademicItemComponent,
     AcademicListItemComponent,
+    AbmEmploymentItemComponent,
   ],
   imports: [
     CommonModule,

@@ -6,6 +6,6 @@ export interface AcademicItem {
   estado: AcademicStates;
   mesDesde: string;
   anioDesde: string;
-  mesHasta: string;
-  anioHasta: string;
+  mesHasta?: string;
+  anioHasta?: string;
 }

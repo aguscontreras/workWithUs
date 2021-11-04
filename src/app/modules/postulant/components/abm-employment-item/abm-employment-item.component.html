@@ -1,0 +1,195 @@
+<form
+  id="employmentDataForm"
+  [formGroup]="employmentDataForm"
+  (ngSubmit)="onSubmit()"
+>
+  <p-panel header="Datos de empleo">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3">
+      <div class="col form-group">
+        <label for="cargo" class="form-group__label form-group__label--required"
+          >Cargo</label
+        >
+        <input
+          pInputText
+          type="text"
+          id="cargo"
+          formControlName="cargo"
+          aria-describedby="cargo-help"
+          class="form-group__input"
+        />
+        <small
+          id="cargo-help"
+          class="form-group__helper"
+          *ngIf="f['cargo'].invalid && submitted"
+          >Completa este campo.</small
+        >
+      </div>
+
+      <div class="col form-group">
+        <label
+          for="nombreEmpresa"
+          class="form-group__label form-group__label--required"
+          >Empresa</label
+        >
+        <input
+          pInputText
+          type="text"
+          id="nombreEmpresa"
+          formControlName="nombreEmpresa"
+          aria-describedby="nombreEmpresa-help"
+          class="form-group__input"
+        />
+        <small
+          id="nombreEmpresa-help"
+          class="form-group__helper"
+          *ngIf="f['nombreEmpresa'].invalid && submitted"
+          >Completa este campo.</small
+        >
+      </div>
+
+      <div class="col form-group">
+        <label for="sectorEmpresa" class="form-group__label"
+          >Sector de la empresa</label
+        >
+        <p-dropdown
+          [options]="sectorEmpresa"
+          inputId="sectorEmpresa"
+          formControlName="sectorEmpresa"
+          styleClass="form-group__input"
+          aria-describedby="sectorEmpresa-help"
+          appendTo="body"
+        ></p-dropdown>
+        <small
+          id="sectorEmpresa-help"
+          class="form-group__helper"
+          *ngIf="f['sectorEmpresa'].invalid && submitted"
+          >Completa este campo.</small
+        >
+      </div>
+
+      <div class="col form-group">
+        <label for="ubicacion" class="form-group__label">Ubicación</label>
+        <input
+          pInputText
+          type="text"
+          id="ubicacion"
+          formControlName="ubicacion"
+          aria-describedby="ubicacion-help"
+          class="form-group__input"
+        />
+        <small
+          id="ubicacion-help"
+          class="form-group__helper"
+          *ngIf="f['ubicacion'].invalid && submitted"
+          >Completa este campo.</small
+        >
+      </div>
+
+      <div class="col form-group d-flex justify-content-center">
+        <p-checkbox
+          [binary]="true"
+          formControlName="trabajaActualmente"
+          label="Actualmente trabajo en este puesto"
+          inputId="trabajaActualmente"
+          (onChange)="handleChangeCheckTrabajaActualmente($event.checked)"
+        ></p-checkbox>
+      </div>
+
+      <div class="col form-group">
+        <label
+          for="mesDesde"
+          class="form-group__label form-group__label--required"
+          >Período desde</label
+        >
+
+        <div class="row">
+          <div class="col pe-2">
+            <p-dropdown
+              appDropdownMonth
+              styleClass="form-group__input"
+              aria-describedby="periodoDesde-help"
+              formControlName="mesDesde"
+              placeholder="Mes"
+              appendTo="body"
+            ></p-dropdown>
+          </div>
+          <div class="col-5 ps-0">
+            <p-dropdown
+              #anioDesde
+              appDropdownYear
+              styleClass="form-group__input"
+              aria-describedby="periodoDesde-help"
+              formControlName="anioDesde"
+              placeholder="Año"
+              appendTo="body"
+              (onChange)="handleChangeAnioDesde($event.value)"
+            ></p-dropdown>
+          </div>
+        </div>
+
+        <small
+          id="periodoDesde-help"
+          class="form-group__helper"
+          *ngIf="(f['mesDesde'].invalid || f['anioDesde'].invalid) && submitted"
+          >Completa este campo.</small
+        >
+      </div>
+
+      <div class="col form-group">
+        <label
+          for="mesHasta"
+          [ngClass]="{
+            'form-group__label': true,
+            'form-group__label--required': f.mesHasta.enabled
+          }"
+          >Período hasta</label
+        >
+
+        <div class="row">
+          <div class="col pe-2">
+            <p-dropdown
+              appDropdownMonth
+              formControlName="mesHasta"
+              styleClass="form-group__input"
+              aria-describedby="periodoHasta-help"
+              placeholder="Mes"
+              appendTo="body"
+            ></p-dropdown>
+          </div>
+          <div class="col-5 ps-0">
+            <p-dropdown
+              #anioHasta
+              appDropdownYear
+              formControlName="anioHasta"
+              styleClass="form-group__input"
+              aria-describedby="periodoHasta-help"
+              placeholder="Año"
+              appendTo="body"
+            ></p-dropdown>
+          </div>
+        </div>
+
+        <small
+          *ngIf="(f['mesHasta'].invalid || f['anioHasta'].invalid) && submitted"
+          id="periodoHasta-help"
+          class="form-group__helper"
+          >Completa este campo.</small
+        >
+      </div>
+    </div>
+
+    <ng-template pTemplate="footer">
+      <div class="row justify-content-end">
+        <div class="col-auto">
+          <button
+            pButton
+            id="btnGuardar"
+            icon="pi pi-save"
+            label="Guardar"
+            type="submit"
+          ></button>
+        </div>
+      </div>
+    </ng-template>
+  </p-panel>
+</form>

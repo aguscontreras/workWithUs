@@ -13,6 +13,7 @@ import { DialogModule } from 'primeng/dialog';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { CardModule } from 'primeng/card';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { CheckboxModule } from 'primeng/checkbox';
 
 @NgModule({
   declarations: [],
@@ -31,6 +32,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     DynamicDialogModule,
     CardModule,
     ConfirmDialogModule,
+    CheckboxModule,
   ],
   exports: [
     PanelModule,
@@ -46,6 +48,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     DynamicDialogModule,
     CardModule,
     ConfirmDialogModule,
+    CheckboxModule,
   ],
 })
 export class PrimengModule {}

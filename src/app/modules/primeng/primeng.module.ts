@@ -6,6 +6,14 @@ import { ButtonModule } from 'primeng/button';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
 import { ToastModule } from 'primeng/toast';
+import { TabViewModule } from 'primeng/tabview';
+import { DropdownModule } from 'primeng/dropdown';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { DialogModule } from 'primeng/dialog';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import { CardModule } from 'primeng/card';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { CheckboxModule } from 'primeng/checkbox';
 
 @NgModule({
   declarations: [],
@@ -17,6 +25,14 @@ import { ToastModule } from 'primeng/toast';
     MessagesModule,
     MessagesModule,
     ToastModule,
+    TabViewModule,
+    DropdownModule,
+    SelectButtonModule,
+    DialogModule,
+    DynamicDialogModule,
+    CardModule,
+    ConfirmDialogModule,
+    CheckboxModule,
   ],
   exports: [
     PanelModule,
@@ -25,6 +41,14 @@ import { ToastModule } from 'primeng/toast';
     MessageModule,
     MessagesModule,
     ToastModule,
+    TabViewModule,
+    DropdownModule,
+    SelectButtonModule,
+    DialogModule,
+    DynamicDialogModule,
+    CardModule,
+    ConfirmDialogModule,
+    CheckboxModule,
   ],
 })
 export class PrimengModule {}

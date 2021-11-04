@@ -1,0 +1,168 @@
+<form [formGroup]="academicDataForm" (ngSubmit)="onSubmit()">
+  <p-panel header="Datos">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3">
+      <div class="col form-group">
+        <label
+          for="centroEducativo"
+          class="form-group__label form-group__label--required"
+          >Centro educativo</label
+        >
+        <input
+          pInputText
+          type="text"
+          id="centroEducativo"
+          formControlName="centroEducativo"
+          aria-describedby="centroEducativo-help"
+          class="form-group__input"
+        />
+        <small
+          id="centroEducativo-help"
+          class="form-group__helper"
+          *ngIf="f['centroEducativo'].invalid && submitted"
+          >Completa este campo.</small
+        >
+      </div>
+
+      <div class="col form-group">
+        <label for="nivel" class="form-group__label form-group__label--required"
+          >Nivel de estudios</label
+        >
+
+        <p-dropdown
+          [options]="levels"
+          inputId="nivel"
+          formControlName="nivel"
+          styleClass="form-group__input"
+          aria-describedby="nivel-help"
+        ></p-dropdown>
+
+        <small
+          id="nivel-help"
+          class="form-group__helper"
+          *ngIf="f['nivel'].invalid && submitted"
+          >Completa este campo.</small
+        >
+      </div>
+
+      <div class="col form-group">
+        <label
+          class="form-group__label form-group__label--required"
+          for="estado"
+          >Estado</label
+        >
+
+        <p-dropdown
+          [options]="states"
+          inputId="estado"
+          formControlName="estado"
+          styleClass="form-group__input"
+          aria-describedby="estado-help"
+          (onChange)="handleChangeEstado()"
+        ></p-dropdown>
+
+        <small
+          id="estado-help"
+          class="form-group__helper"
+          *ngIf="f['estado'].invalid && submitted"
+          >Completa este campo.</small
+        >
+      </div>
+
+      <div class="col form-group">
+        <label
+          for="mesDesde"
+          class="form-group__label form-group__label--required"
+          >Período desde</label
+        >
+
+        <div class="row">
+          <div class="col pe-2">
+            <p-dropdown
+              appDropdownMonth
+              styleClass="form-group__input"
+              aria-describedby="periodoDesde-help"
+              formControlName="mesDesde"
+              placeholder="Mes"
+              appendTo="body"
+            ></p-dropdown>
+          </div>
+          <div class="col-5 ps-0">
+            <p-dropdown
+              #anioDesde
+              appDropdownYear
+              styleClass="form-group__input"
+              aria-describedby="periodoDesde-help"
+              formControlName="anioDesde"
+              placeholder="Año"
+              appendTo="body"
+              (onChange)="handleChangeAnioDesde($event.value)"
+            ></p-dropdown>
+          </div>
+        </div>
+
+        <small
+          id="periodoDesde-help"
+          class="form-group__helper"
+          *ngIf="(f['mesDesde'].invalid || f['anioDesde'].invalid) && submitted"
+          >Completa este campo.</small
+        >
+      </div>
+
+      <div class="col form-group">
+        <label
+          for="mesHasta"
+          [ngClass]="{
+            'form-group__label': true,
+            'form-group__label--required': f.mesHasta.enabled
+          }"
+          >Período hasta</label
+        >
+
+        <div class="row">
+          <div class="col pe-2">
+            <p-dropdown
+              appDropdownMonth
+              formControlName="mesHasta"
+              styleClass="form-group__input"
+              aria-describedby="periodoHasta-help"
+              placeholder="Mes"
+              appendTo="body"
+            ></p-dropdown>
+          </div>
+          <div class="col-5 ps-0">
+            <p-dropdown
+              #anioHasta
+              appDropdownYear
+              formControlName="anioHasta"
+              styleClass="form-group__input"
+              aria-describedby="periodoHasta-help"
+              placeholder="Año"
+              appendTo="body"
+            ></p-dropdown>
+          </div>
+        </div>
+
+        <small
+          *ngIf="(f['mesHasta'].invalid || f['anioHasta'].invalid) && submitted"
+          id="periodoHasta-help"
+          class="form-group__helper"
+          >Completa este campo.</small
+        >
+      </div>
+    </div>
+
+    <ng-template pTemplate="footer">
+      <div class="row justify-content-end">
+        <div class="col-auto">
+          <button
+            pButton
+            id="btnGuardar"
+            icon="pi pi-save"
+            label="Guardar"
+            type="submit"
+          ></button>
+        </div>
+      </div>
+    </ng-template>
+  </p-panel>
+</form>

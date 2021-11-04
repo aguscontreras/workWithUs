@@ -10,6 +10,9 @@ import { RegisterComponent } from './pages/register/register.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { RouterModule } from '@angular/router';
 import { ForgotComponent } from './pages/forgot/forgot.component';
+import { AcademicLevelPipe } from './pipes/academic-level.pipe';
+import { AcademicStatePipe } from './pipes/academic-state.pipe';
+import { MonthPipe } from './pipes/month.pipe';
 
 @NgModule({
   declarations: [
@@ -19,6 +22,9 @@ import { ForgotComponent } from './pages/forgot/forgot.component';
     HomeComponent,
     NavbarComponent,
     ForgotComponent,
+    AcademicLevelPipe,
+    AcademicStatePipe,
+    MonthPipe,
   ],
   imports: [
     CommonModule,
@@ -27,6 +33,6 @@ import { ForgotComponent } from './pages/forgot/forgot.component';
     FormsModule,
     RouterModule,
   ],
-  exports: [NavbarComponent],
+  exports: [NavbarComponent, AcademicLevelPipe, AcademicStatePipe, MonthPipe],
 })
 export class SharedModule {}

@@ -5,12 +5,21 @@ import { NotFoundComponent } from './modules/shared/pages/not-found/not-found.co
 import { HomeComponent } from './modules/shared/pages/home/home.component';
 import { RegisterComponent } from './modules/shared/pages/register/register.component';
 import { ForgotComponent } from './modules/shared/pages/forgot/forgot.component';
+import { PostulantPanelComponent } from './modules/postulant/pages/postulant-panel/postulant-panel.component';
+import { Role } from './_models';
+import { AuthGuard } from './_helpers';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'forgot', component: ForgotComponent },
+  {
+    path: 'postulant',
+    component: PostulantPanelComponent,
+    data: { roles: [Role.User] },
+    canActivate: [AuthGuard],
+  },
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: '**', component: NotFoundComponent },
 ];

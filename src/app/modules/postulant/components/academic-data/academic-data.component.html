@@ -1,0 +1,22 @@
+<div class="row justify-content-center mt-4">
+  <div class="col-auto">
+    <button
+      pButton
+      icon="pi pi-plus"
+      label="Agregar nuevo"
+      type="button"
+      id="btnNewItem"
+      (click)="openDialogAbmAcademicItem()"
+    ></button>
+  </div>
+</div>
+
+<ul class="mt-5 p-0" *ngIf="academicItems.length; else message">
+  <li *ngFor="let item of academicItems">
+    <app-academic-list-item [academicItem]="item"></app-academic-list-item>
+  </li>
+</ul>
+
+<ng-template #message>
+  <p-messages [(value)]="msgs" [closable]="false" styleClass="mt-5"></p-messages>
+</ng-template>

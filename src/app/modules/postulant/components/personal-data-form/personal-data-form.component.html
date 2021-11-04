@@ -1,0 +1,274 @@
+<form [formGroup]="resumeForm" (ngSubmit)="onSubmit()">
+  <h3 class="mb-2 mt-4">Información básica</h3>
+
+  <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3" formGroupName="personalInfo">
+    <div class="col form-group">
+      <label for="nombre" class="form-group__label">Nombre/s</label>
+      <input
+        pInputText
+        type="text"
+        id="nombre"
+        formControlName="nombre"
+        aria-describedby="nombre-help"
+        class="form-group__input"
+      />
+      <small
+        id="nombre-help"
+        class="form-group__helper"
+        *ngIf="personalInfo['nombre'].invalid && submitted"
+        >Completa este campo.</small
+      >
+    </div>
+
+    <div class="col form-group">
+      <label for="apellido" class="form-group__label">Apellido/s</label>
+      <input
+        pInputText
+        type="text"
+        id="apellido"
+        formControlName="apellido"
+        aria-describedby="apellido-help"
+        class="form-group__input"
+      />
+      <small
+        id="apellido-help"
+        class="form-group__helper"
+        *ngIf="personalInfo['apellido'].invalid && submitted"
+        >Completa este campo.</small
+      >
+    </div>
+
+    <div class="col form-group">
+      <label for="fechaNacimiento" class="form-group__label"
+        >Fecha de nacimiento</label
+      >
+      <input
+        pInputText
+        type="date"
+        id="fechaNacimiento"
+        formControlName="fechaNacimiento"
+        aria-describedby="fechaNacimiento-help"
+        class="form-group__input"
+      />
+      <small
+        id="fechaNacimiento-help"
+        class="form-group__helper"
+        *ngIf="personalInfo['fechaNacimiento'].invalid && submitted"
+        >Completa este campo.</small
+      >
+    </div>
+
+    <div class="col form-group">
+      <label for="tipoDocumento" class="form-group__label"
+        >Tipo de Identificación</label
+      >
+
+      <p-dropdown
+        inputId="tipoDocumento"
+        styleClass="form-group__input"
+        formControlName="tipoDocumento"
+        aria-describedby="tipoDocumento-help"
+      ></p-dropdown>
+
+      <small
+        id="tipoDocumento-help"
+        class="form-group__helper"
+        *ngIf="personalInfo['tipoDocumento'].invalid && submitted"
+        >Completa este campo.</small
+      >
+    </div>
+
+    <div class="col form-group">
+      <label for="documento" class="form-group__label"
+        >Número de Identificación</label
+      >
+      <input
+        pInputText
+        type="number"
+        id="documento"
+        formControlName="documento"
+        aria-describedby="documento-help"
+        class="form-group__input"
+      />
+      <small
+        id="documento-help"
+        class="form-group__helper"
+        *ngIf="personalInfo['documento'].invalid && submitted"
+        >Completa este campo.</small
+      >
+    </div>
+  </div>
+
+  <h3 class="mb-2 mt-4">Dirección</h3>
+
+  <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3" formGroupName="contactInfo">
+    <div class="col form-group">
+      <label for="email" class="form-group__label">Correo electrónico</label>
+      <input
+        pInputText
+        type="email"
+        id="email"
+        formControlName="email"
+        aria-describedby="email-help"
+        class="form-group__input"
+        readonly
+      />
+      <small
+        id="email-help"
+        class="form-group__helper"
+        *ngIf="contactInfo['email'].invalid && submitted"
+        >Completa este campo.</small
+      >
+    </div>
+
+    <div class="col form-group">
+      <label for="codArea" class="form-group__label">Número de teléfono</label>
+
+      <div class="row">
+        <div class="col-4 pe-2">
+          <input
+            pInputText
+            type="number"
+            id="codArea"
+            formControlName="codArea"
+            aria-describedby="codArea-help"
+            class="form-group__input"
+            min="0"
+          />
+        </div>
+
+        <div class="col ps-0">
+          <input
+            pInputText
+            type="tel"
+            id="telefono"
+            formControlName="telefono"
+            aria-describedby="telefono-help"
+            class="form-group__input"
+          />
+        </div>
+      </div>
+
+      <small
+        id="telefono-help"
+        class="form-group__helper"
+        *ngIf="
+          (contactInfo['codArea'].invalid ||
+            contactInfo['telefono'].invalid) &&
+          submitted
+        "
+        >Completa este campo.</small
+      >
+    </div>
+
+    <div class="col form-group">
+      <label for="codAreaAlt" class="form-group__label"
+        >Número de teléfono alternativo</label
+      >
+
+      <div class="row">
+        <div class="col-4 pe-2">
+          <input
+            pInputText
+            type="number"
+            id="codAreaAlt"
+            formControlName="codAreaAlt"
+            aria-describedby="codAreaAlt-help"
+            class="form-group__input"
+            min="0"
+          />
+        </div>
+
+        <div class="col ps-0">
+          <input
+            pInputText
+            type="tel"
+            id="telefonoAlt"
+            formControlName="telefonoAlt"
+            aria-describedby="telefonoAlt-help"
+            class="form-group__input"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="mb-2 mt-4">Contacto</h3>
+
+  <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3" formGroupName="adress">
+    <div class="col form-group">
+      <label for="calle" class="form-group__label">Calle</label>
+      <input
+        pInputText
+        type="text"
+        id="calle"
+        formControlName="calle"
+        aria-describedby="calle-help"
+        class="form-group__input"
+      />
+    </div>
+
+    <div class="col form-group">
+      <label for="numero" class="form-group__label">Número</label>
+      <input
+        pInputText
+        type="number"
+        id="numero"
+        formControlName="numero"
+        aria-describedby="numero-help"
+        class="form-group__input"
+      />
+    </div>
+
+    <div class="col form-group">
+      <label for="pais" class="form-group__label">País</label>
+      <p-dropdown
+        inputId="pais"
+        styleClass="form-group__input"
+        formControlName="pais"
+      ></p-dropdown>
+    </div>
+
+    <div class="col form-group">
+      <label for="provincia" class="form-group__label">Provincia</label>
+      <p-dropdown
+        inputId="provincia"
+        styleClass="form-group__input"
+        formControlName="provincia"
+      ></p-dropdown>
+    </div>
+
+    <div class="col form-group">
+      <label for="localidad" class="form-group__label">Localidad</label>
+      <p-dropdown
+        inputId="localidad"
+        styleClass="form-group__input"
+        formControlName="localidad"
+      ></p-dropdown>
+    </div>
+
+    <div class="col form-group">
+      <label for="postal" class="form-group__label">Código postal</label>
+      <input
+        pInputText
+        type="number"
+        id="postal"
+        formControlName="postal"
+        aria-describedby="postal-help"
+        class="form-group__input"
+      />
+    </div>
+  </div>
+
+  <div class="row my-5 justify-content-end">
+    <div class="col-auto">
+      <button
+        pButton
+        type="submit"
+        icon="pi pi-save"
+        label="Guardar cambios"
+        [disabled]="resumeForm.pristine"
+      ></button>
+    </div>
+  </div>
+</form>

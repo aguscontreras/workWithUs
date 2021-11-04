@@ -85,4 +85,18 @@ export class AuthenticationService {
       username,
     });
   }
+
+  navigateAfterLogin(returnUrl?: string): void {
+    switch (this.userValue.role) {
+      case Role.User:
+        returnUrl = '/postulant';
+        break;
+
+      default:
+        returnUrl = '';
+        break;
+    }
+
+    this.router.navigate([returnUrl]);
+  }
 }

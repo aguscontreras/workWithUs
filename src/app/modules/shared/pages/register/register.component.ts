@@ -11,11 +11,13 @@ import { first } from 'rxjs/operators';
 import { Role } from '../../../../_models/role';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
+  providers: [MessageService],
 })
 export class RegisterComponent implements OnInit, OnDestroy {
   formRegister: FormGroup;
@@ -26,9 +28,9 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private fb: FormBuilder,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private messageService: MessageService
   ) {}
 
   ngOnInit(): void {
@@ -69,10 +71,18 @@ export class RegisterComponent implements OnInit, OnDestroy {
       .pipe(first())
       .subscribe({
         next: (result) => {
-          console.log(result);
+          this.loading = false;
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Registro exitoso',
+            detail: '¡Bienvenido/a! Redirigiendo a la aplicación...',
+          });
 
           const { username, password } = result;
-          this.loginUser(username, password);
+
+          setTimeout(() => {
+            this.loginUser(username, password);
+          }, 3000);
         },
 
         error: (err: HttpErrorResponse) => {
@@ -90,7 +100,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (user) => {
           if (user) {
-            this.router.navigate(['/']);
+            //  this.router.navigate(['/']);
+            this.authenticationService.navigateAfterLogin();
           }
         },
       });

@@ -1,3 +1,4 @@
+export { EmploymentItem } from './employmentItem';
 export { AcademicItem } from './academicItem';
 export { AcademicStates } from './academicStates';
 export { AcademicLevel } from './academicLevels';

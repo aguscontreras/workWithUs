@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { DialogService } from 'primeng/dynamicdialog';
 import { AbmEmploymentItemComponent } from '../abm-employment-item/abm-employment-item.component';
 import { first } from 'rxjs/operators';
+import { EmploymentItem } from '../../../../_models/employmentItem';
+import { Message } from 'primeng/api';
 
 @Component({
   selector: 'app-employment-data',
@@ -10,19 +12,33 @@ import { first } from 'rxjs/operators';
   providers: [DialogService],
 })
 export class EmploymentDataComponent implements OnInit {
-  constructor(
-    private dialogService: DialogService,
-  ) {}
+  employmentItems: EmploymentItem[] = [];
+  msgs: Message[] = [];
 
-  ngOnInit(): void {}
+  constructor(private dialogService: DialogService) {}
+
+  ngOnInit(): void {
+    this.msgs = [
+      {
+        severity: 'info',
+        summary: 'Nada por aquí.',
+        detail: 'Aún no cargaste tu experiencia laboral.',
+        closable: false,
+      },
+    ];
+  }
 
   handleClickBtnNewItem(): void {
     const ref = this.dialogService.open(AbmEmploymentItemComponent, {
       header: 'Agregar experiencia laboral',
     });
 
-    ref.onClose
-      .pipe(first())
-      .subscribe({ next: (result) => console.log(result) });
+    ref.onClose.pipe(first()).subscribe({
+      next: (item) => {
+        if (item != null) {
+          this.employmentItems.push(item);
+        }
+      },
+    });
   }
 }

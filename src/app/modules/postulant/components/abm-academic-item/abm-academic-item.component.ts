@@ -21,7 +21,7 @@ export class AbmAcademicItemComponent implements OnInit {
   states: SelectItem[];
   levels: SelectItem[];
   academicDataForm: FormGroup;
-  selectedItem: AcademicItem;
+  private _selectedItem: AcademicItem;
   submitted: boolean;
   @ViewChild('anioHasta', { read: DropdownYearDirective })
   private anioHasta: DropdownYearDirective;
@@ -55,8 +55,12 @@ export class AbmAcademicItemComponent implements OnInit {
 
     if (this.config.data?.selectedItem) {
       this.selectedItem = this.config.data.selectedItem;
-      this.setData();
     }
+  }
+
+  set selectedItem(item: AcademicItem) {
+    this._selectedItem = item;
+    this.setData(this._selectedItem);
   }
 
   createForm(): void {
@@ -77,16 +81,18 @@ export class AbmAcademicItemComponent implements OnInit {
     return this.academicDataForm.controls;
   }
 
-  private setData(): void {
+  private setData(selected: AcademicItem): void {
     this.academicDataForm.patchValue({
-      centroEducativo: this.selectedItem.centroEducativo,
-      nivel: this.selectedItem.nivel,
-      estado: this.selectedItem.estado,
-      mesDesde: this.selectedItem.mesDesde,
-      anioDesde: this.selectedItem.anioDesde,
-      mesHasta: this.selectedItem.mesHasta,
-      anioHasta: this.selectedItem.anioHasta,
+      centroEducativo: selected.centroEducativo,
+      nivel: selected.nivel,
+      estado: selected.estado,
+      mesDesde: selected.mesDesde,
+      anioDesde: selected.anioDesde,
+      mesHasta: selected.mesHasta,
+      anioHasta: selected.anioHasta,
     });
+
+    this.setStatusPeriodoHasta();
   }
 
   onSubmit(): void {
@@ -102,6 +108,10 @@ export class AbmAcademicItemComponent implements OnInit {
   }
 
   handleChangeEstado(): void {
+    this.setStatusPeriodoHasta();
+  }
+
+  private setStatusPeriodoHasta(): void {
     if (this.f.estado.value !== AcademicStates.Cursando) {
       this.f.mesHasta.enable();
       this.f.anioHasta.enable();

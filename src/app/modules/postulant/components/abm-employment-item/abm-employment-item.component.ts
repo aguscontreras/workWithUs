@@ -1,14 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { SelectItem } from 'primeng/api';
-import { FormControl } from '@angular/forms';
-import {
-  AbstractControl,
-  FormGroup,
-  Validators,
-  FormBuilder,
-} from '@angular/forms';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { DropdownYearDirective } from 'src/app/_directives/dropdowns/dropdown-year.directive';
+import { EmploymentItem } from '../../../../_models/employmentItem';
 
 @Component({
   selector: 'app-abm-employment-item',
@@ -19,6 +14,7 @@ export class AbmEmploymentItemComponent implements OnInit {
   employmentDataForm: FormGroup;
   submitted: boolean;
   sectorEmpresa: SelectItem[];
+  private _selectedItem: EmploymentItem;
   @ViewChild('anioHasta', { read: DropdownYearDirective })
   private anioHasta: DropdownYearDirective;
 
@@ -33,6 +29,15 @@ export class AbmEmploymentItemComponent implements OnInit {
 
   ngOnInit(): void {
     this.createForm();
+
+    if (this.config.data?.selectedItem) {
+      this.selectedItem = this.config.data.selectedItem;
+    }
+  }
+
+  set selectedItem(item: EmploymentItem) {
+    this._selectedItem = item;
+    this.setData(this._selectedItem);
   }
 
   createForm(): void {
@@ -53,16 +58,37 @@ export class AbmEmploymentItemComponent implements OnInit {
     return this.employmentDataForm.controls;
   }
 
+  private setData(selected: EmploymentItem): void {
+    this.employmentDataForm.patchValue({
+      cargo: selected.cargo,
+      nombreEmpresa: selected.nombreEmpresa,
+      sectorEmpresa: selected.sectorEmpresa,
+      ubicacion: selected.ubicacion,
+      mesDesde: selected.mesDesde,
+      anioDesde: selected.anioDesde,
+      mesHasta: selected.mesHasta,
+      anioHasta: selected.anioHasta,
+      trabajaActualmente: selected.trabajaActualmente,
+    });
+
+    this.setStatusPeriodoHasta(selected.trabajaActualmente);
+  }
+
   onSubmit(): void {
     console.log(this.employmentDataForm.value);
     this.submitted = true;
+
     if (this.employmentDataForm.valid) {
       this.ref.close({ ...this.employmentDataForm.value });
     }
   }
 
   handleChangeCheckTrabajaActualmente(checked: boolean): void {
-    if (checked) {
+    this.setStatusPeriodoHasta(checked);
+  }
+
+  private setStatusPeriodoHasta(enabled: boolean): void {
+    if (enabled) {
       this.f.mesHasta.disable();
       this.f.anioHasta.disable();
       this.f.mesHasta.clearValidators();
@@ -75,8 +101,6 @@ export class AbmEmploymentItemComponent implements OnInit {
       this.f.mesHasta.updateValueAndValidity();
       this.f.anioHasta.updateValueAndValidity();
     }
-
-    console.log(this.f.trabajaActualmente.value);
   }
 
   handleChangeAnioDesde(anioDesde: string | number): void {

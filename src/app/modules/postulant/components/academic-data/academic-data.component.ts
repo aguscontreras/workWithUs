@@ -22,7 +22,7 @@ export class AcademicDataComponent implements OnInit {
         severity: 'info',
         summary: 'Nada por aquí.',
         detail: 'Aún no cargaste tu información académica.',
-        closable: false
+        closable: false,
       },
     ];
   }

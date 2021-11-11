@@ -1,4 +1,4 @@
-<div class="row justify-content-center">
+<div class="row justify-content-center mt-4">
   <div class="col-auto">
     <button
       pButton
@@ -10,3 +10,19 @@
     ></button>
   </div>
 </div>
+
+<ul class="mt-5 p-0" *ngIf="employmentItems.length; else message">
+  <li *ngFor="let item of employmentItems">
+    <app-employment-list-item
+      [employmentItem]="item"
+    ></app-employment-list-item>
+  </li>
+</ul>
+
+<ng-template #message>
+  <p-messages
+    [(value)]="msgs"
+    [closable]="false"
+    styleClass="mt-5"
+  ></p-messages>
+</ng-template>

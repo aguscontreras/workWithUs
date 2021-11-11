@@ -1,4 +1,4 @@
-export interface EmploymentData {
+export interface EmploymentItem {
   cargo: string;
   nombreEmpresa: string;
   sectorEmpresa: string;

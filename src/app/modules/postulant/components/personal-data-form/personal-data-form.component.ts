@@ -20,24 +20,18 @@ export class PersonalDataFormComponent implements OnInit {
     this.resumeForm = this.formBuilder.group({
       personalInfo: this.formBuilder.group({
         nombre: ['', Validators.required],
-        apellido: ['', Validators.required],
         fechaNacimiento: ['', Validators.required],
         documento: ['', Validators.required],
         tipoDocumento: ['', Validators.required],
       }),
       contactInfo: this.formBuilder.group({
-        codArea: ['', Validators.required],
         telefono: ['', Validators.required],
-        codAreaAlt: [''],
-        telefonoAlt: [''],
         email: ['', [Validators.required, Validators.email]],
       }),
       adress: this.formBuilder.group({
-        calle: [''],
-        numero: [''],
+        direccion: [''],
         provincia: [''],
         localidad: [''],
-        pais: [''],
         postal: [''],
       }),
     });

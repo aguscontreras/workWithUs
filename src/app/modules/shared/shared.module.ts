@@ -13,6 +13,7 @@ import { ForgotComponent } from './pages/forgot/forgot.component';
 import { AcademicLevelPipe } from './pipes/academic-level.pipe';
 import { AcademicStatePipe } from './pipes/academic-state.pipe';
 import { MonthPipe } from './pipes/month.pipe';
+import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { MonthPipe } from './pipes/month.pipe';
     RegisterComponent,
     HomeComponent,
     NavbarComponent,
+    NavMenuComponent,
     ForgotComponent,
     AcademicLevelPipe,
     AcademicStatePipe,

@@ -1,0 +1,37 @@
+@import "../../../../_styles/variables/colors";
+
+.navmenu {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  height: 64px;
+
+  //   &__item {
+  //     padding: 1rem 0.5rem;
+  //   }
+
+  &__link {
+    display: inline-flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 1rem;
+    text-decoration: none;
+    color: inherit;
+    font-weight: bold;
+
+    &:hover {
+      border-bottom: 2px solid black;
+    }
+
+    &--active {
+      color: $color-primary;
+      border-bottom: 2px solid $color-primary;
+    }
+
+    &--active:hover {
+      border-bottom: 2px solid $color-primary;
+    }
+  }
+}

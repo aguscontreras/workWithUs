@@ -54,7 +54,11 @@ html {
   }
 
   &__helper {
-    color: $text-danger;
+    margin-top: 0.5em;
+
+    &--invalid {
+      color: $text-danger;
+    }
   }
 
   &__form-control {

@@ -1,4 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  Input,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { SelectItem } from 'primeng/api';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
@@ -14,38 +21,32 @@ export class AbmEmploymentItemComponent implements OnInit {
   employmentDataForm: FormGroup;
   submitted: boolean;
   sectorEmpresa: SelectItem[];
-  private _selectedItem: EmploymentItem;
+
   @ViewChild('anioHasta', { read: DropdownYearDirective })
   private anioHasta: DropdownYearDirective;
 
-  constructor(
-    private config: DynamicDialogConfig,
-    private ref: DynamicDialogRef,
-    private formBuilder: FormBuilder
-  ) {
-    this.config.width = '75%';
-    this.config.dismissableMask = false;
-  }
-
-  ngOnInit(): void {
-    this.createForm();
-
-    if (this.config.data?.selectedItem) {
-      this.selectedItem = this.config.data.selectedItem;
+  private _selectedItem: EmploymentItem;
+  @Input() set selectedItem(item: EmploymentItem) {
+    if (typeof item !== 'undefined') {
+      this._selectedItem = item;
+      this.setData(this._selectedItem);
     }
   }
 
-  set selectedItem(item: EmploymentItem) {
-    this._selectedItem = item;
-    this.setData(this._selectedItem);
+  @Output() cancelarItem = new EventEmitter<any>();
+  @Output() nuevoItem = new EventEmitter<EmploymentItem>();
+
+  constructor(private formBuilder: FormBuilder) {
+    this.createForm();
   }
+
+  ngOnInit(): void {}
 
   createForm(): void {
     this.employmentDataForm = this.formBuilder.group({
       cargo: ['', Validators.required],
       nombreEmpresa: ['', Validators.required],
       sectorEmpresa: [''],
-      ubicacion: [''],
       mesDesde: ['', Validators.required],
       anioDesde: ['', Validators.required],
       mesHasta: ['', Validators.required],
@@ -63,7 +64,6 @@ export class AbmEmploymentItemComponent implements OnInit {
       cargo: selected.cargo,
       nombreEmpresa: selected.nombreEmpresa,
       sectorEmpresa: selected.sectorEmpresa,
-      ubicacion: selected.ubicacion,
       mesDesde: selected.mesDesde,
       anioDesde: selected.anioDesde,
       mesHasta: selected.mesHasta,
@@ -79,7 +79,8 @@ export class AbmEmploymentItemComponent implements OnInit {
     this.submitted = true;
 
     if (this.employmentDataForm.valid) {
-      this.ref.close({ ...this.employmentDataForm.value });
+      //  this.ref.close({ ...this.employmentDataForm.value });
+      this.nuevoItem.emit({ ...this.employmentDataForm.value });
     }
   }
 

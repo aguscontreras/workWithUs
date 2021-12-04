@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { AcademicItem } from '../../../../_models';
 import { DialogService } from 'primeng/dynamicdialog';
 import { AbmAcademicItemComponent } from '../abm-academic-item/abm-academic-item.component';
@@ -15,21 +15,20 @@ import { ConfirmationService } from 'primeng/api';
 })
 export class AcademicListItemComponent implements OnInit {
   @Input() academicItem: AcademicItem;
+  @Output() editItem = new EventEmitter<AcademicItem>();
 
-  constructor(
-    private dialogService: DialogService,
-    private confirmationService: ConfirmationService
-  ) {}
+  constructor(private confirmationService: ConfirmationService) {}
 
   ngOnInit(): void {}
 
   handleClickBtnEditItem(): void {
-    this.dialogService.open(AbmAcademicItemComponent, {
-      header: 'Editar formación académica',
-      data: {
-        selectedItem: this.academicItem,
-      },
-    });
+    // this.dialogService.open(AbmAcademicItemComponent, {
+    //   header: 'Editar formación académica',
+    //   data: {
+    //     selectedItem: this.academicItem,
+    //   },
+    // });
+    this.editItem.emit(this.academicItem);
   }
 
   handleClickBtnDeleteItem(): void {

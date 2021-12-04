@@ -1,22 +1,37 @@
-<div class="row justify-content-center mt-4">
-  <div class="col-auto">
-    <button
-      pButton
-      icon="pi pi-plus"
-      label="Agregar nuevo"
-      type="button"
-      id="btnNewItem"
-      (click)="openDialogAbmAcademicItem()"
-    ></button>
-  </div>
-</div>
-
-<ul class="mt-5 p-0" *ngIf="academicItems.length; else message">
+<ul class="mt-4 p-0" *ngIf="academicItems.length && !addingItem; else message">
   <li *ngFor="let item of academicItems">
-    <app-academic-list-item [academicItem]="item"></app-academic-list-item>
+    <app-academic-list-item
+      [academicItem]="item"
+      (editItem)="handleEvtEditItem(item)"
+    ></app-academic-list-item>
   </li>
 </ul>
 
 <ng-template #message>
-  <p-messages [(value)]="msgs" [closable]="false" styleClass="mt-5"></p-messages>
+  <p-messages
+    [(value)]="msgs"
+    [closable]="false"
+    styleClass="mt-4"
+  ></p-messages>
 </ng-template>
+
+<app-abm-academic-item
+  *ngIf="addingItem"
+  [selectedItem]="selectedItem"
+  (cancelarItem)="addingItem = false; setEmptyMessage()"
+  (nuevoItem)="handleNewItem($event)"
+></app-abm-academic-item>
+
+<div class="row justify-content-center mt-5">
+  <div class="col-auto">
+    <button
+      pButton
+      icon="pi pi-plus"
+      label="Agregar información académica"
+      type="button"
+      id="btnNewItem"
+      class="p-button-text"
+      (click)="handleClickBtnNewItem()"
+    ></button>
+  </div>
+</div>

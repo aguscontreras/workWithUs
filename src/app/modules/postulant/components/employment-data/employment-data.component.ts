@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { DialogService } from 'primeng/dynamicdialog';
-import { AbmEmploymentItemComponent } from '../abm-employment-item/abm-employment-item.component';
-import { first } from 'rxjs/operators';
 import { EmploymentItem } from '../../../../_models/employmentItem';
 import { Message } from 'primeng/api';
 
@@ -9,36 +6,44 @@ import { Message } from 'primeng/api';
   selector: 'app-employment-data',
   templateUrl: './employment-data.component.html',
   styleUrls: ['./employment-data.component.scss'],
-  providers: [DialogService],
 })
 export class EmploymentDataComponent implements OnInit {
   employmentItems: EmploymentItem[] = [];
+  selectedItem: EmploymentItem;
+  addingItem: boolean;
   msgs: Message[] = [];
 
-  constructor(private dialogService: DialogService) {}
+  constructor() {}
 
   ngOnInit(): void {
-    this.msgs = [
-      {
-        severity: 'info',
-        summary: 'Nada por aquí.',
-        detail: 'Aún no cargaste tu experiencia laboral.',
-        closable: false,
-      },
-    ];
+    this.setEmptyMessage();
+  }
+
+  setEmptyMessage(): void {
+    if (!this.employmentItems.length) {
+      this.msgs = [
+        {
+          severity: 'info',
+          summary: 'Nada por aquí.',
+          detail: 'Aún no cargaste tu información académica.',
+          closable: false,
+        },
+      ];
+    }
   }
 
   handleClickBtnNewItem(): void {
-    const ref = this.dialogService.open(AbmEmploymentItemComponent, {
-      header: 'Agregar experiencia laboral',
-    });
+    if (!this.addingItem) {
+      this.addingItem = true;
+      this.msgs = [];
+    }
+  }
 
-    ref.onClose.pipe(first()).subscribe({
-      next: (item) => {
-        if (item != null) {
-          this.employmentItems.push(item);
-        }
-      },
-    });
+  handleNewItem(newItem: EmploymentItem): void {
+    console.log(newItem);
+    if (newItem) {
+      this.employmentItems.push({ ...newItem });
+      this.addingItem = false;
+    }
   }
 }

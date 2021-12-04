@@ -35,16 +35,10 @@ export class AbmAcademicItemComponent implements OnInit, OnDestroy {
 
   @Output() cancelarItem = new EventEmitter();
   @Output() nuevoItem = new EventEmitter<AcademicItem>();
-  @Output() editedItem = new EventEmitter<AcademicItem>();
-
-  private _state: 'new' | 'edit';
-  @Input() set state(state: 'new' | 'edit') {
-    this._state = state;
-  }
 
   private _selectedItem: AcademicItem;
   @Input() set selectedItem(item: AcademicItem) {
-    if (typeof item !== 'undefined' && this._state === 'edit') {
+    if (typeof item !== 'undefined') {
       this._selectedItem = item;
       this.setData(this._selectedItem);
     }
@@ -55,8 +49,6 @@ export class AbmAcademicItemComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    console.log(this.state);
-
     this.states = [
       { label: 'Culminado', value: AcademicStates.Culminado },
       { label: 'Cursando', value: AcademicStates.Cursando },
@@ -113,13 +105,6 @@ export class AbmAcademicItemComponent implements OnInit, OnDestroy {
     this.submitted = true;
     if (this.academicDataForm.valid) {
       this.nuevoItem.emit({ ...this.academicDataForm.value });
-    }
-  }
-
-  handleClickBtnEditar(): void {
-    this.submitted = true;
-    if (this.academicDataForm.valid) {
-      this.editedItem.emit({ ...this.academicDataForm.value });
     }
   }
 

@@ -152,24 +152,12 @@
 
         <div class="col-auto">
           <button
-            *ngIf="state === 'new'; else btnEditar"
             pButton
             id="btnGuardar"
             icon="pi pi-save"
             label="Guardar"
             type="submit"
           ></button>
-
-          <ng-template #btnEditar>
-            <button
-              pButton
-              id="btnEditar"
-              icon="pi pi-save"
-              label="Editar"
-              type="button"
-              (click)="handleClickBtnEditar()"
-            ></button>
-          </ng-template>
         </div>
       </div>
     </ng-template>

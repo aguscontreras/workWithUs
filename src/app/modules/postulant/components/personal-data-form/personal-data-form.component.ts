@@ -29,10 +29,10 @@ export class PersonalDataFormComponent implements OnInit {
         email: ['', [Validators.required, Validators.email]],
       }),
       adress: this.formBuilder.group({
-        direccion: [''],
-        provincia: [''],
-        localidad: [''],
-        postal: [''],
+        direccion: ['', Validators.required],
+        provincia: ['', Validators.required],
+        localidad: ['', Validators.required],
+        postal: ['', Validators.required],
       }),
     });
   }
@@ -49,10 +49,18 @@ export class PersonalDataFormComponent implements OnInit {
     return (this.resumeForm.get('contactInfo') as FormGroup).controls;
   }
 
+  get adress() {
+    return (this.resumeForm.get('adress') as FormGroup).controls;
+  }
+
+  limitCharactersPostal(value: string | number): void {
+    const newValue = String(value).slice(0, 4);
+    this.f.adress.get('postal').setValue(+newValue);
+  }
+
   onSubmit(): void {
     this.submitted = true;
     console.log(this.resumeForm);
     console.log(this.resumeForm.value);
-    console.log(this.personalInfo);
   }
 }

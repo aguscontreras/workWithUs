@@ -14,9 +14,9 @@
       />
       <small
         id="nombre-help"
-        class="form-group__helper"
+        class="form-group__helper form-group__helper--invalid"
         *ngIf="personalInfo['nombre'].invalid && submitted"
-        >Completa este campo.</small
+        >Completá este campo.</small
       >
     </div>
 
@@ -34,9 +34,9 @@
       />
       <small
         id="fechaNacimiento-help"
-        class="form-group__helper"
+        class="form-group__helper form-group__helper--invalid"
         *ngIf="personalInfo['fechaNacimiento'].invalid && submitted"
-        >Completa este campo.</small
+        >Completá este campo.</small
       >
     </div>
 
@@ -56,9 +56,9 @@
 
           <small
             id="tipoDocumento-help"
-            class="form-group__helper"
+            class="form-group__helper form-group__helper--invalid"
             *ngIf="personalInfo['tipoDocumento'].invalid && submitted"
-            >Completa este campo.</small
+            >Completá este campo.</small
           >
         </div>
       </div>
@@ -78,9 +78,9 @@
           />
           <small
             id="documento-help"
-            class="form-group__helper"
+            class="form-group__helper form-group__helper--invalid"
             *ngIf="personalInfo['documento'].invalid && submitted"
-            >Completa este campo.</small
+            >Completá este campo.</small
           >
         </div>
       </div>
@@ -103,9 +103,9 @@
       />
       <small
         id="email-help"
-        class="form-group__helper"
+        class="form-group__helper form-group__helper--invalid"
         *ngIf="contactInfo['email'].invalid && submitted"
-        >Completa este campo.</small
+        >Completá este campo.</small
       >
     </div>
 
@@ -123,9 +123,9 @@
 
       <small
         id="telefono-help"
-        class="form-group__helper"
+        class="form-group__helper form-group__helper--invalid"
         *ngIf="contactInfo['telefono'].invalid && submitted"
-        >Completa este campo.</small
+        >Completá este campo.</small
       >
     </div>
   </div>
@@ -143,6 +143,14 @@
         aria-describedby="direccion-help"
         class="form-group__input"
       />
+      <small class="form-group__helper">Calle y número</small>
+
+      <small
+        id="direccion-help"
+        class="form-group__helper form-group__helper--invalid"
+        *ngIf="adress['direccion'].invalid && submitted"
+        >Completá este campo.</small
+      >
     </div>
 
     <div class="row">
@@ -156,7 +164,15 @@
             formControlName="postal"
             aria-describedby="postal-help"
             class="form-group__input"
+            (input)="limitCharactersPostal($event.target.value)"
           />
+
+          <small
+            id="postal-help"
+            class="form-group__helper form-group__helper--invalid"
+            *ngIf="adress['postal'].invalid && submitted"
+            >Completá este campo.</small
+          >
         </div>
       </div>
 
@@ -168,17 +184,32 @@
             styleClass="form-group__input"
             formControlName="provincia"
           ></p-dropdown>
+          <small
+            id="provincia-help"
+            class="form-group__helper form-group__helper--invalid"
+            *ngIf="adress['provincia'].invalid && submitted"
+            >Completá este campo.</small
+          >
         </div>
       </div>
 
       <div class="col">
         <div class="form-group">
           <label for="localidad" class="form-group__label">Localidad</label>
-          <p-dropdown
-            inputId="localidad"
-            styleClass="form-group__input"
+          <input
+            pInputText
+            type="text"
+            id="localidad"
             formControlName="localidad"
-          ></p-dropdown>
+            aria-describedby="localidad-help"
+            class="form-group__input"
+          />
+          <small
+            id="localidad-help"
+            class="form-group__helper form-group__helper--invalid"
+            *ngIf="adress['localidad'].invalid && submitted"
+            >Completá este campo.</small
+          >
         </div>
       </div>
     </div>

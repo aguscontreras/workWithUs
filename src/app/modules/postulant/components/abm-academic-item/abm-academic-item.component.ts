@@ -1,5 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import {
+  Component,
+  OnInit,
+  Output,
+  ViewChild,
+  EventEmitter,
+  Input,
+} from '@angular/core';
 import {
   FormGroup,
   FormBuilder,
@@ -11,30 +17,46 @@ import { AcademicLevel } from '../../../../_models';
 import { AcademicStates } from '../../../../_models/academicStates';
 import { DropdownYearDirective } from '../../../../_directives/dropdowns/dropdown-year.directive';
 import { AcademicItem } from '../../../../_models/academicItem';
+import { OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-abm-academic-item',
   templateUrl: './abm-academic-item.component.html',
   styleUrls: ['./abm-academic-item.component.scss'],
 })
-export class AbmAcademicItemComponent implements OnInit {
+export class AbmAcademicItemComponent implements OnInit, OnDestroy {
   states: SelectItem[];
   levels: SelectItem[];
   academicDataForm: FormGroup;
-  private _selectedItem: AcademicItem;
   submitted: boolean;
+
   @ViewChild('anioHasta', { read: DropdownYearDirective })
   private anioHasta: DropdownYearDirective;
 
-  constructor(
-    private config: DynamicDialogConfig,
-    private ref: DynamicDialogRef,
-    private formBuilder: FormBuilder
-  ) {
-    this.config.width = '75%';
+  @Output() cancelarItem = new EventEmitter();
+  @Output() nuevoItem = new EventEmitter<AcademicItem>();
+  @Output() editedItem = new EventEmitter<AcademicItem>();
+
+  private _state: 'new' | 'edit';
+  @Input() set state(state: 'new' | 'edit') {
+    this._state = state;
+  }
+
+  private _selectedItem: AcademicItem;
+  @Input() set selectedItem(item: AcademicItem) {
+    if (typeof item !== 'undefined' && this._state === 'edit') {
+      this._selectedItem = item;
+      this.setData(this._selectedItem);
+    }
+  }
+
+  constructor(private formBuilder: FormBuilder) {
+    this.createForm();
   }
 
   ngOnInit(): void {
+    console.log(this.state);
+
     this.states = [
       { label: 'Culminado', value: AcademicStates.Culminado },
       { label: 'Cursando', value: AcademicStates.Cursando },
@@ -50,18 +72,9 @@ export class AbmAcademicItemComponent implements OnInit {
       { label: 'Master', value: AcademicLevel.Master },
       { label: 'Doctorado', value: AcademicLevel.Doctorado },
     ];
-
-    this.createForm();
-
-    if (this.config.data?.selectedItem) {
-      this.selectedItem = this.config.data.selectedItem;
-    }
   }
 
-  set selectedItem(item: AcademicItem) {
-    this._selectedItem = item;
-    this.setData(this._selectedItem);
-  }
+  ngOnDestroy(): void {}
 
   createForm(): void {
     this.academicDataForm = this.formBuilder.group({
@@ -99,7 +112,14 @@ export class AbmAcademicItemComponent implements OnInit {
     console.log(this.academicDataForm.value);
     this.submitted = true;
     if (this.academicDataForm.valid) {
-      this.ref.close({ ...this.academicDataForm.value });
+      this.nuevoItem.emit({ ...this.academicDataForm.value });
+    }
+  }
+
+  handleClickBtnEditar(): void {
+    this.submitted = true;
+    if (this.academicDataForm.valid) {
+      this.editedItem.emit({ ...this.academicDataForm.value });
     }
   }
 
